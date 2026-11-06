@@ -1,0 +1,4 @@
+# Playground laeuft auf GitHub Pages. Netlify-Builds ueberspringen,
+# damit keine Credits fuer Deploys verbraucht werden.
+[build]
+  ignore = "exit 0"
