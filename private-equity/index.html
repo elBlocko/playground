@@ -1,0 +1,512 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Private Equity verständlich erklärt – Fonds, Buyouts, Renditen & Kritik</title>
+<meta name="description" content="Ausführlicher Leitfaden zu Private Equity: Wie Fonds funktionieren, wie ein Leveraged Buyout rechnet, Gebühren, Kennzahlen, Marktlage 2026 und Kritik – mit interaktiven Rechnern.">
+<style>
+  :root{
+    --bg:#f5f3ee;--ink:#17202b;--muted:#5a6370;--line:#ddd7cb;--card:#ffffff;
+    --navy:#14253d;--gold:#b8892f;--gold2:#f3e8d1;--green:#2e7d5b;--red:#b5483a;--blue:#3b6ea8;
+  }
+  @media (prefers-color-scheme: dark){
+    :root{--bg:#0f141b;--ink:#e9e6df;--muted:#a1a9b4;--line:#28313d;--card:#161d26;
+      --navy:#0b1220;--gold:#d9ad55;--gold2:#2a2414;--green:#5bbf91;--red:#e07a6b;--blue:#7aa7dc}
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{margin:0;font-family:system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;background:var(--bg);color:var(--ink);line-height:1.65;font-size:17px}
+  a{color:var(--blue)}
+  .hero{background:var(--navy);color:#f3efe6;padding:4.5rem 1.25rem 3.5rem;position:relative;overflow:hidden}
+  .hero::after{content:"";position:absolute;right:-120px;top:-120px;width:420px;height:420px;border-radius:50%;
+    background:radial-gradient(circle,rgba(217,173,85,.28),transparent 70%)}
+  .hero .in{max-width:900px;margin:auto;position:relative;z-index:1}
+  .kicker{color:var(--gold);font-weight:700;letter-spacing:.12em;text-transform:uppercase;font-size:.8rem}
+  h1{font-family:Georgia,"Times New Roman",serif;font-size:clamp(2.2rem,6.5vw,3.8rem);line-height:1.05;margin:.5rem 0 1.1rem;font-weight:700}
+  .hero p{font-size:1.15rem;max-width:44rem;color:#cfd6e0;margin:0}
+  .facts{display:flex;flex-wrap:wrap;gap:.6rem;margin-top:1.8rem}
+  .facts span{border:1px solid rgba(217,173,85,.45);color:#f3e6c8;border-radius:999px;padding:.3rem .85rem;font-size:.85rem}
+  nav{position:sticky;top:0;background:var(--bg);border-bottom:1px solid var(--line);z-index:10}
+  nav .in{max-width:900px;margin:auto;display:flex;gap:1.1rem;padding:.75rem 1.25rem;overflow-x:auto;scrollbar-width:none}
+  nav a{color:var(--ink);text-decoration:none;font-size:.92rem;white-space:nowrap;opacity:.8}
+  nav a:hover{color:var(--gold);opacity:1}
+  main{max-width:900px;margin:auto;padding:0 1.25rem 3rem}
+  section{padding-top:3.2rem}
+  h2{font-family:Georgia,serif;font-size:clamp(1.6rem,4vw,2.1rem);margin:0 0 .3rem;line-height:1.2}
+  .sec-no{color:var(--gold);font-weight:700;font-size:.85rem;letter-spacing:.1em}
+  h3{font-size:1.1rem;margin:1.6rem 0 .4rem}
+  .lead{color:var(--muted);font-size:1.08rem;margin-top:.4rem}
+  .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:1rem;margin:1.2rem 0}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:1.15rem 1.2rem}
+  .card h4{margin:.1rem 0 .35rem;font-size:1.02rem}
+  .card p{margin:0;color:var(--muted);font-size:.95rem}
+  .tag{display:inline-block;font-size:.72rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--gold);margin-bottom:.2rem}
+  .note{background:var(--gold2);border-left:4px solid var(--gold);border-radius:8px;padding:1rem 1.15rem;margin:1.3rem 0;font-size:.97rem}
+  table{width:100%;border-collapse:collapse;margin:1rem 0;font-size:.94rem}
+  th,td{text-align:left;padding:.6rem .55rem;border-bottom:1px solid var(--line);vertical-align:top}
+  th{font-size:.8rem;text-transform:uppercase;letter-spacing:.05em;color:var(--muted)}
+  .tablewrap{overflow-x:auto}
+  ol.steps{counter-reset:s;list-style:none;padding:0;margin:1.2rem 0}
+  ol.steps li{counter-increment:s;position:relative;padding:0 0 1.2rem 3.1rem;border-left:2px solid var(--line);margin-left:1rem}
+  ol.steps li:last-child{border-left-color:transparent}
+  ol.steps li::before{content:counter(s);position:absolute;left:-1.05rem;top:-.1rem;width:2.1rem;height:2.1rem;border-radius:50%;
+    background:var(--navy);color:var(--gold);font-weight:700;display:flex;align-items:center;justify-content:center;border:2px solid var(--gold)}
+  ol.steps b{display:block}
+  ol.steps span{color:var(--muted);font-size:.95rem}
+  .calc{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:1.4rem;margin:1.3rem 0}
+  .calc h3{margin-top:0}
+  .inputs{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:.9rem 1.4rem}
+  label{font-size:.88rem;color:var(--muted);display:block}
+  label output{float:right;color:var(--ink);font-weight:700}
+  input[type=range]{width:100%;accent-color:var(--gold)}
+  .results{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:.8rem;margin:1.3rem 0 .6rem}
+  .kpi{background:var(--bg);border-radius:12px;padding:.8rem;text-align:center}
+  .kpi b{display:block;font-size:1.45rem;font-family:Georgia,serif}
+  .kpi small{color:var(--muted);font-size:.78rem;text-transform:uppercase;letter-spacing:.05em}
+  .bars{margin-top:.8rem}
+  .bar{display:grid;grid-template-columns:150px 1fr 80px;gap:.6rem;align-items:center;font-size:.88rem;margin:.35rem 0}
+  .bar .track{background:var(--bg);border-radius:6px;height:16px;overflow:hidden}
+  .bar .fill{height:100%;border-radius:6px;transition:width .3s}
+  .bar .val{text-align:right;font-variant-numeric:tabular-nums}
+  @media (max-width:560px){.bar{grid-template-columns:105px 1fr 64px;font-size:.8rem}}
+  svg text{font-family:system-ui,sans-serif}
+  details{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:.8rem 1.1rem;margin:.6rem 0}
+  summary{cursor:pointer;font-weight:600}
+  details p{color:var(--muted);margin:.6rem 0 .2rem}
+  .two{display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin:1rem 0}
+  @media (max-width:640px){.two{grid-template-columns:1fr}}
+  .pro{border-top:4px solid var(--green)}.con{border-top:4px solid var(--red)}
+  .pro ul,.con ul{padding-left:1.1rem;margin:.4rem 0 0;color:var(--muted);font-size:.95rem}
+  .pro li,.con li{margin:.3rem 0}
+  dl.glossar{display:grid;grid-template-columns:minmax(120px,190px) 1fr;gap:.55rem 1.2rem;margin:1rem 0}
+  dl.glossar dt{font-weight:700}
+  dl.glossar dd{margin:0;color:var(--muted);font-size:.95rem}
+  @media (max-width:560px){dl.glossar{grid-template-columns:1fr}dl.glossar dd{margin-bottom:.5rem}}
+  .sources{font-size:.85rem;color:var(--muted)}
+  .sources li{margin:.25rem 0}
+  footer{border-top:1px solid var(--line);color:var(--muted);font-size:.85rem;text-align:center;padding:2rem 1.25rem}
+  footer .disc{max-width:720px;margin:0 auto .8rem}
+  .totop{position:fixed;right:1rem;bottom:1rem;background:var(--navy);color:var(--gold);border:1px solid var(--gold);border-radius:50%;
+    width:2.6rem;height:2.6rem;display:flex;align-items:center;justify-content:center;text-decoration:none;font-weight:700;opacity:.85}
+</style>
+</head>
+<body>
+
+<header class="hero"><div class="in">
+  <div class="kicker">Playground · Finanzwissen</div>
+  <h1>Private Equity – wie Beteiligungskapital wirklich funktioniert</h1>
+  <p>Firmen kaufen, umbauen, nach einigen Jahren wieder verkaufen: Private Equity ist eine der einflussreichsten und zugleich umstrittensten Anlageklassen der Welt. Dieser Leitfaden erklärt die Mechanik dahinter – von der Fondsstruktur über den Leveraged Buyout bis zur Frage, wem das Ganze eigentlich nützt.</p>
+  <div class="facts"><span>≈ 25 Min. Lesezeit</span><span>2 interaktive Rechner</span><span>Glossar mit 20 Begriffen</span><span>Stand: November 2026</span></div>
+</div></header>
+
+<nav><div class="in">
+  <a href="#was">Grundlagen</a><a href="#strategien">Strategien</a><a href="#fonds">Fondsstruktur</a><a href="#lbo">LBO-Rechner</a>
+  <a href="#hebel">Werthebel</a><a href="#deal">Deal-Ablauf</a><a href="#gebuehren">Gebühren</a><a href="#kennzahlen">Kennzahlen</a>
+  <a href="#markt">Markt 2026</a><a href="#kritik">Kritik</a><a href="#anleger">Für Privatanleger</a><a href="#glossar">Glossar</a>
+</div></nav>
+
+<main>
+
+<!-- 1 -->
+<section id="was">
+  <div class="sec-no">01</div>
+  <h2>Was ist Private Equity?</h2>
+  <p class="lead">„Private Equity“ heißt wörtlich „privates Eigenkapital“ – also Beteiligungen an Unternehmen, die <em>nicht</em> an der Börse gehandelt werden.</p>
+  <p>Eine Private-Equity-Gesellschaft (oft einfach „PE-Firma“ oder „Finanzinvestor“) sammelt Geld von großen Investoren ein – Pensionskassen, Versicherungen, Staatsfonds, Stiftungen, Family Offices – und bündelt es in einem Fonds. Mit diesem Fonds kauft sie Mehrheits- oder Minderheitsbeteiligungen an Unternehmen, versucht deren Wert über einige Jahre zu steigern und verkauft sie anschließend wieder. Der Gewinn aus Kauf und Verkauf ist die Rendite.</p>
+  <p>Drei Merkmale unterscheiden Private Equity von einer klassischen Aktienanlage:</p>
+  <div class="grid">
+    <div class="card"><span class="tag">Kontrolle</span><h4>Aktive Eigentümer</h4><p>PE-Investoren kaufen meist die Mehrheit, besetzen Aufsichts- oder Beiräte, tauschen gegebenenfalls das Management aus und steuern die Strategie direkt.</p></div>
+    <div class="card"><span class="tag">Zeit</span><h4>Begrenzte Haltedauer</h4><p>Ein Unternehmen bleibt typischerweise 3 bis 7 Jahre im Portfolio. Der Ausstieg (Exit) ist von Anfang an Teil des Plans.</p></div>
+    <div class="card"><span class="tag">Illiquidität</span><h4>Gebundenes Kapital</h4><p>Wer in einen PE-Fonds investiert, kommt in der Regel 10 Jahre und länger nicht an sein Geld. Dafür erwarten Anleger eine Prämie gegenüber Aktien.</p></div>
+  </div>
+  <div class="note"><b>Begriffsklärung:</b> Im weiten Sinn umfasst Private Equity auch Venture Capital (Wagniskapital für Start-ups). Im engeren – und im Alltag üblichen – Sinn meint man damit vor allem <b>Buyouts</b>, also die Übernahme etablierter, profitabler Unternehmen.</div>
+</section>
+
+<!-- 2 -->
+<section id="strategien">
+  <div class="sec-no">02</div>
+  <h2>Die wichtigsten Strategien</h2>
+  <p class="lead">Private Equity ist kein einheitliches Geschäft. Je nach Reifegrad des Zielunternehmens unterscheiden sich Risiko, Hebel und Renditequelle stark.</p>
+  <div class="tablewrap"><table>
+    <thead><tr><th>Strategie</th><th>Zielunternehmen</th><th>Typische Beteiligung</th><th>Hauptrenditequelle</th></tr></thead>
+    <tbody>
+      <tr><td><b>Venture Capital</b></td><td>Start-ups, oft noch ohne Gewinn</td><td>Minderheit</td><td>Wenige extreme Gewinner gleichen viele Totalverluste aus</td></tr>
+      <tr><td><b>Growth Equity</b></td><td>Schnell wachsende, meist schon profitable Firmen</td><td>Minderheit, wenig Fremdkapital</td><td>Umsatz- und Gewinnwachstum</td></tr>
+      <tr><td><b>Buyout / LBO</b></td><td>Reife, stabile Unternehmen mit planbarem Cashflow</td><td>Mehrheit, viel Fremdkapital</td><td>Operative Verbesserung, Schuldenabbau, Multiple</td></tr>
+      <tr><td><b>Turnaround / Distressed</b></td><td>Firmen in der Krise oder Insolvenz</td><td>Mehrheit, oft über Kredite</td><td>Sanierung, günstiger Einstieg</td></tr>
+      <tr><td><b>Secondaries</b></td><td>Bestehende Fondsanteile oder Portfolios</td><td>Kauf von anderen Investoren</td><td>Rabatt beim Kauf, kürzere Laufzeit</td></tr>
+      <tr><td><b>Infrastruktur / Real Assets</b></td><td>Netze, Energie, Logistik, Rechenzentren</td><td>Mehrheit, lange Haltedauer</td><td>Stabile, oft regulierte Erträge</td></tr>
+    </tbody>
+  </table></div>
+  <p>Eng verwandt ist <b>Private Credit</b>: Statt Eigenkapital vergeben Fonds hier direkt Kredite an Unternehmen – häufig genau an solche, die von PE-Firmen übernommen wurden. Private Credit ist in den letzten Jahren stark gewachsen, weil Banken sich aus riskanteren Finanzierungen zurückgezogen haben.</p>
+</section>
+
+<!-- 3 -->
+<section id="fonds">
+  <div class="sec-no">03</div>
+  <h2>Wie ein PE-Fonds aufgebaut ist</h2>
+  <p class="lead">Fast alle PE-Fonds folgen derselben Grundarchitektur – einer Kommanditgesellschaft mit zwei Arten von Partnern.</p>
+
+  <svg viewBox="0 0 760 330" role="img" aria-label="Schema der Fondsstruktur: Limited Partners geben Kapital in den Fonds, der General Partner verwaltet ihn und investiert in Portfoliounternehmen" style="width:100%;height:auto;margin:1rem 0">
+    <defs><marker id="ar" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="currentColor"/></marker></defs>
+    <g style="color:var(--muted)" stroke="currentColor" stroke-width="2" fill="none" marker-end="url(#ar)">
+      <path d="M160 70 L300 140"/><path d="M600 70 L460 140"/><path d="M380 200 L180 250"/><path d="M380 200 L380 250"/><path d="M380 200 L580 250"/>
+    </g>
+    <g font-size="13" text-anchor="middle">
+      <rect x="40" y="20" width="240" height="56" rx="10" fill="var(--card)" stroke="var(--line)"/>
+      <text x="160" y="44" font-weight="700" fill="var(--ink)">Limited Partners (LPs)</text>
+      <text x="160" y="63" fill="var(--muted)">Pensionskassen, Versicherer, Staatsfonds</text>
+      <rect x="480" y="20" width="240" height="56" rx="10" fill="var(--card)" stroke="var(--line)"/>
+      <text x="600" y="44" font-weight="700" fill="var(--ink)">General Partner (GP)</text>
+      <text x="600" y="63" fill="var(--muted)">PE-Firma: entscheidet, verwaltet</text>
+      <rect x="270" y="140" width="220" height="60" rx="12" fill="var(--navy)" stroke="var(--gold)" stroke-width="2"/>
+      <text x="380" y="166" font-weight="700" fill="#f3e6c8">PE-Fonds</text>
+      <text x="380" y="185" fill="#cfd6e0">Laufzeit ca. 10 + 2 Jahre</text>
+      <rect x="90" y="250" width="180" height="50" rx="10" fill="var(--card)" stroke="var(--line)"/><text x="180" y="280" fill="var(--ink)">Unternehmen A</text>
+      <rect x="290" y="250" width="180" height="50" rx="10" fill="var(--card)" stroke="var(--line)"/><text x="380" y="280" fill="var(--ink)">Unternehmen B</text>
+      <rect x="490" y="250" width="180" height="50" rx="10" fill="var(--card)" stroke="var(--line)"/><text x="580" y="280" fill="var(--ink)">Unternehmen C …</text>
+      <text x="130" y="125" fill="var(--muted)" font-size="12">~98–99 % des Kapitals</text>
+      <text x="630" y="125" fill="var(--muted)" font-size="12">~1–2 % + Management</text>
+    </g>
+  </svg>
+
+  <h3>Die Rollen</h3>
+  <p><b>Limited Partners (LPs)</b> stellen fast das gesamte Kapital, haften aber nur bis zur Höhe ihrer Einlage und haben kein Mitspracherecht bei einzelnen Investitionen. <b>Der General Partner (GP)</b> ist die PE-Firma selbst: Sie trifft alle Investitionsentscheidungen, haftet formal unbeschränkt (in der Praxis über eine eigene Gesellschaft begrenzt) und investiert meist 1–2 % eigenes Geld mit – damit sie „Skin in the Game“ hat.</p>
+
+  <h3>Commitment und Capital Calls</h3>
+  <p>LPs überweisen ihr Geld nicht auf einen Schlag. Sie geben eine <b>Kapitalzusage (Commitment)</b> ab, etwa 50 Mio. Euro. Erst wenn der GP ein Unternehmen kauft, ruft er den benötigten Teil per <b>Capital Call</b> ab – mit oft nur 10 Tagen Frist. Die Investitionsphase dauert typischerweise 4–5 Jahre, danach folgt die Halte- und Verkaufsphase. Erlöse aus Exits werden als <b>Distributions</b> an die LPs ausgeschüttet.</p>
+
+  <h3>Die J-Kurve</h3>
+  <p>In den ersten Jahren fallen Gebühren und Kaufnebenkosten an, während die Wertsteigerungen noch nicht realisiert sind. Der kumulierte Cashflow eines Fonds ist deshalb anfangs negativ und dreht erst später ins Plus – grafisch ergibt das die typische J-Form.</p>
+
+  <svg viewBox="0 0 760 260" role="img" aria-label="J-Kurve: kumulierter Netto-Cashflow eines PE-Fonds fällt in den ersten Jahren und steigt ab etwa Jahr 4 deutlich an" style="width:100%;height:auto;margin:.6rem 0">
+    <line x1="60" y1="120" x2="730" y2="120" stroke="var(--muted)" stroke-width="1.5"/>
+    <line x1="60" y1="20" x2="60" y2="235" stroke="var(--muted)" stroke-width="1.5"/>
+    <path d="M60 120 C120 150, 170 205, 230 210 S330 190, 380 150 S480 70, 560 50 S680 35, 730 32" fill="none" stroke="var(--gold)" stroke-width="4"/>
+    <g font-size="12" fill="var(--muted)" text-anchor="middle">
+      <text x="128" y="250">Jahr 2</text><text x="264" y="250">Jahr 4</text><text x="400" y="250">Jahr 6</text><text x="536" y="250">Jahr 8</text><text x="672" y="250">Jahr 10</text>
+    </g>
+    <text x="70" y="113" font-size="12" fill="var(--muted)">0</text>
+    <text x="240" y="232" font-size="13" fill="var(--red)" text-anchor="middle">Investitions-/Gebührenphase</text>
+    <text x="600" y="80" font-size="13" fill="var(--green)" text-anchor="middle">Exits &amp; Ausschüttungen</text>
+    <text x="30" y="70" font-size="12" fill="var(--muted)" transform="rotate(-90 30 70)">kum. Cashflow</text>
+  </svg>
+</section>
+
+<!-- 4 -->
+<section id="lbo">
+  <div class="sec-no">04</div>
+  <h2>Der Leveraged Buyout – und warum Schulden die Rendite treiben</h2>
+  <p class="lead">Das Herzstück klassischer Private Equity ist der LBO: eine Übernahme, die zu einem großen Teil mit Krediten finanziert wird.</p>
+  <p>Das Prinzip ähnelt einem Immobilienkauf mit Hypothek. Der Fonds bringt nur einen Teil des Kaufpreises als Eigenkapital ein, der Rest wird über Bankkredite, Anleihen oder Private Credit finanziert. Entscheidend: <b>Die Schulden werden dem übernommenen Unternehmen aufgeladen</b>, nicht dem Fonds. Das Unternehmen zahlt Zinsen und Tilgung aus seinem eigenen Cashflow.</p>
+  <p>Steigt der Unternehmenswert, gehört der gesamte Zuwachs den Eigenkapitalgebern – auf eine kleine Eigenkapitalbasis bezogen ergibt das eine hohe Rendite. Fällt er, schmilzt das Eigenkapital ebenso schnell. Probiere es aus:</p>
+
+  <div class="calc" id="lboCalc">
+    <h3>LBO-Rechner</h3>
+    <div class="inputs">
+      <label>EBITDA beim Kauf (Mio. €) <output id="o_ebitda"></output><input type="range" id="ebitda" min="10" max="200" step="5" value="50"></label>
+      <label>Kaufpreis-Multiple (× EBITDA) <output id="o_entry"></output><input type="range" id="entry" min="4" max="16" step="0.5" value="10"></label>
+      <label>Fremdkapitalanteil am Kaufpreis <output id="o_debt"></output><input type="range" id="debtPct" min="0" max="80" step="5" value="55"></label>
+      <label>EBITDA-Wachstum pro Jahr <output id="o_growth"></output><input type="range" id="growth" min="-10" max="20" step="1" value="6"></label>
+      <label>Exit-Multiple (× EBITDA) <output id="o_exit"></output><input type="range" id="exitM" min="4" max="16" step="0.5" value="10"></label>
+      <label>Haltedauer (Jahre) <output id="o_years"></output><input type="range" id="years" min="2" max="10" step="1" value="5"></label>
+      <label>Schuldentilgung pro Jahr (% des Startkredits) <output id="o_paydown"></output><input type="range" id="paydown" min="0" max="15" step="1" value="6"></label>
+    </div>
+    <div class="results">
+      <div class="kpi"><small>Eigenkapital rein</small><b id="r_eqIn">–</b></div>
+      <div class="kpi"><small>Eigenkapital raus</small><b id="r_eqOut">–</b></div>
+      <div class="kpi"><small>Multiple (MOIC)</small><b id="r_moic">–</b></div>
+      <div class="kpi"><small>IRR p. a.</small><b id="r_irr">–</b></div>
+    </div>
+    <div style="font-size:.9rem;color:var(--muted)">Woher kommt der Wertzuwachs?</div>
+    <div class="bars" id="bars"></div>
+    <p style="font-size:.85rem;color:var(--muted);margin:.8rem 0 0" id="lboHint"></p>
+  </div>
+  <p style="font-size:.9rem;color:var(--muted)">Vereinfachtes Modell: ohne Transaktionskosten, Zinsen, Steuern, Managementbeteiligung und Zwischenausschüttungen. Die Tilgung wird als aus dem freien Cashflow bezahlt angenommen.</p>
+
+  <div class="note"><b>Experiment:</b> Setze den Fremdkapitalanteil auf 0 % und dann auf 70 %. Bei gleicher Unternehmensentwicklung verändert sich die Eigenkapitalrendite dramatisch. Senke dann das Exit-Multiple um zwei Punkte – so sieht man, wie empfindlich Buyouts auf sinkende Bewertungen reagieren.</div>
+</section>
+
+<!-- 5 -->
+<section id="hebel">
+  <div class="sec-no">05</div>
+  <h2>Die drei (plus eins) Werthebel</h2>
+  <p class="lead">Jeder Gewinn eines Buyouts lässt sich auf wenige Quellen zurückführen. Der Rechner oben zeigt sie als Balken.</p>
+  <div class="grid">
+    <div class="card"><span class="tag">Hebel 1</span><h4>Operative Verbesserung</h4><p>Mehr Umsatz, höhere Margen: Preisgestaltung, Einkauf, Digitalisierung, neue Märkte, effizientere Prozesse. Gilt heute als wichtigster und „ehrlichster“ Hebel.</p></div>
+    <div class="card"><span class="tag">Hebel 2</span><h4>Multiple Expansion</h4><p>Das Unternehmen wird teurer verkauft, als es gekauft wurde – gemessen am Vielfachen des Gewinns. Teils verdient (größer, krisenfester), teils schlicht Marktglück.</p></div>
+    <div class="card"><span class="tag">Hebel 3</span><h4>Entschuldung</h4><p>Das Unternehmen tilgt die Kaufkredite aus eigenem Cashflow. Jeder getilgte Euro Schulden erhöht den Eigenkapitalwert beim Exit.</p></div>
+    <div class="card"><span class="tag">Plus</span><h4>Buy-and-Build</h4><p>Eine „Plattform“ kauft viele kleine Wettbewerber zu (Add-ons). Kleine Firmen werden billiger bewertet als große – durch Zusammenlegen entsteht Multiple-Arbitrage plus Synergien.</p></div>
+  </div>
+  <p>In Zeiten fallender Zinsen und steigender Bewertungen (etwa 2010–2021) trugen Leverage und Multiple Expansion einen großen Teil der Renditen. Seit dem Zinsanstieg 2022 sind Kredite teurer und Bewertungen weniger großzügig – deshalb betont die Branche heute die operative Wertsteigerung, und viele PE-Firmen beschäftigen eigene Teams aus Ex-Beratern und Branchenmanagern („Operating Partners“).</p>
+</section>
+
+<!-- 6 -->
+<section id="deal">
+  <div class="sec-no">06</div>
+  <h2>Ein Deal von Anfang bis Ende</h2>
+  <p class="lead">Vom ersten Kontakt bis zum Verkauf vergehen oft fünf Jahre oder mehr.</p>
+  <ol class="steps">
+    <li><b>Sourcing</b><span>Die PE-Firma sucht Kandidaten: über M&amp;A-Berater, eigene Branchenanalysen, Netzwerke oder Unternehmer ohne Nachfolger – im deutschen Mittelstand ein häufiger Anlass.</span></li>
+    <li><b>Erstprüfung &amp; indikatives Angebot</b><span>Auf Basis eines Info-Memorandums wird ein unverbindlicher Kaufpreis genannt. In Bieterverfahren kommen nur wenige in die nächste Runde.</span></li>
+    <li><b>Due Diligence</b><span>Wochenlange Tiefenprüfung: Finanzen, Steuern, Recht, Markt, Technik, Umwelt/ESG, IT-Sicherheit – meist mit externen Beratern. Parallel wird die Finanzierung mit Banken oder Kreditfonds verhandelt.</span></li>
+    <li><b>Kaufvertrag (SPA) &amp; Closing</b><span>Verhandlung von Preis, Garantien und Haftung; anschließend Kartell- und ggf. Investitionsprüfungen. Mit dem Closing gehen die Anteile über – oft an eine eigens gegründete Erwerbsgesellschaft („NewCo“).</span></li>
+    <li><b>100-Tage-Plan</b><span>Direkt nach Übernahme: Governance aufsetzen, Reporting einführen, Management incentivieren (Beteiligungsprogramm), erste Maßnahmen starten.</span></li>
+    <li><b>Wertsteigerung</b><span>Mehrjährige Umsetzung: Wachstum, Effizienz, Zukäufe, Professionalisierung. Regelmäßige Bewertung gegenüber den LPs.</span></li>
+    <li><b>Exit</b><span>Verkauf an einen strategischen Käufer (Trade Sale), an einen anderen Finanzinvestor (Secondary Buyout), Börsengang (IPO) oder Übertragung in einen eigenen Fortführungsfonds (Continuation Vehicle).</span></li>
+  </ol>
+  <div class="note"><b>Trend Continuation Vehicles:</b> Weil Börsengänge und Verkäufe in den letzten Jahren schwierig waren, verschieben GPs ihre besten Beteiligungen zunehmend in neue Fonds, die sie selbst verwalten. Alte LPs können aussteigen oder mitgehen. Kritiker sehen darin einen Interessenkonflikt, weil der GP auf beiden Seiten des Geschäfts sitzt und den Preis mitbestimmt.</div>
+</section>
+
+<!-- 7 -->
+<section id="gebuehren">
+  <div class="sec-no">07</div>
+  <h2>Gebühren: „Two and Twenty“</h2>
+  <p class="lead">PE-Firmen verdienen auf zwei Wegen – mit festen Gebühren und mit einer Gewinnbeteiligung.</p>
+  <div class="grid">
+    <div class="card"><span class="tag">Fix</span><h4>Management Fee ≈ 1,5–2 % p. a.</h4><p>Während der Investitionsphase meist auf das zugesagte Kapital, danach oft auf das investierte Kapital. Deckt Gehälter, Büros, Prüfkosten.</p></div>
+    <div class="card"><span class="tag">Variabel</span><h4>Carried Interest ≈ 20 %</h4><p>Der GP erhält rund ein Fünftel des Gewinns – aber erst, wenn die LPs ihr Kapital plus eine Mindestverzinsung zurückhaben.</p></div>
+    <div class="card"><span class="tag">Schwelle</span><h4>Hurdle Rate ≈ 8 % p. a.</h4><p>Die „Preferred Return“: Bis die LPs diese Rendite erreicht haben, gibt es keinen Carry. Danach holt der GP per Catch-up auf.</p></div>
+  </div>
+  <p>Die Verteilung der Erlöse folgt einem festgelegten <b>Wasserfall (Distribution Waterfall)</b>. Beim europäischen Modell wird über den ganzen Fonds gerechnet, beim amerikanischen Modell Deal für Deal – Letzteres ist für den GP günstiger, weil er früher Carry erhält.</p>
+
+  <div class="calc" id="wfCalc">
+    <h3>Wasserfall-Rechner (europäisches Modell)</h3>
+    <div class="inputs">
+      <label>Investiertes Kapital (Mio. €) <output id="o_cap"></output><input type="range" id="cap" min="50" max="1000" step="50" value="500"></label>
+      <label>Brutto-Multiple des Fonds <output id="o_gm"></output><input type="range" id="gm" min="0.6" max="3.5" step="0.1" value="2"></label>
+      <label>Laufzeit bis zur Rückzahlung (Jahre) <output id="o_wy"></output><input type="range" id="wy" min="3" max="12" step="1" value="6"></label>
+      <label>Hurdle Rate p. a. <output id="o_hr"></output><input type="range" id="hr" min="0" max="12" step="1" value="8"></label>
+      <label>Carried Interest <output id="o_ci"></output><input type="range" id="ci" min="10" max="30" step="1" value="20"></label>
+    </div>
+    <div class="bars" id="wfBars"></div>
+    <div class="results">
+      <div class="kpi"><small>Gewinn gesamt</small><b id="w_profit">–</b></div>
+      <div class="kpi"><small>an LPs</small><b id="w_lp">–</b></div>
+      <div class="kpi"><small>Carry an GP</small><b id="w_gp">–</b></div>
+      <div class="kpi"><small>Netto-Multiple LP</small><b id="w_net">–</b></div>
+    </div>
+    <p style="font-size:.85rem;color:var(--muted);margin:.3rem 0 0">Vereinfacht: eine Einzahlung, eine Rückzahlung, 100 % Catch-up, Managementgebühren nicht berücksichtigt.</p>
+  </div>
+  <p>Hinzu kommen in der Praxis weitere Entgelte – etwa Transaktions- oder Monitoringgebühren, die Portfoliounternehmen an die PE-Firma zahlen. Große LPs haben in den letzten Jahren durchgesetzt, dass diese weitgehend mit der Management Fee verrechnet werden. Für Anleger gilt als Faustregel: Zwischen Brutto- und Nettorendite eines Fonds liegen oft mehrere Prozentpunkte pro Jahr.</p>
+</section>
+
+<!-- 8 -->
+<section id="kennzahlen">
+  <div class="sec-no">08</div>
+  <h2>Renditen messen: IRR, TVPI, DPI &amp; Co.</h2>
+  <p class="lead">Weil Geld zu unterschiedlichen Zeitpunkten fließt, reicht eine einfache Prozentrendite nicht aus.</p>
+  <div class="tablewrap"><table>
+    <thead><tr><th>Kennzahl</th><th>Bedeutung</th><th>Worauf achten?</th></tr></thead>
+    <tbody>
+      <tr><td><b>IRR</b><br><small>Internal Rate of Return</small></td><td>Zeitgewichtete jährliche Rendite aller Zahlungsströme</td><td>Lässt sich durch frühe Rückzahlungen oder Kreditlinien („Subscription Lines“) aufhübschen</td></tr>
+      <tr><td><b>TVPI / MOIC</b></td><td>Gesamtwert (ausgezahlt + noch gehalten) geteilt durch eingezahltes Kapital</td><td>Sagt nichts über die Dauer – 2× in 3 Jahren ist etwas völlig anderes als 2× in 10 Jahren</td></tr>
+      <tr><td><b>DPI</b></td><td>Tatsächlich ausgezahltes Geld geteilt durch eingezahltes Kapital</td><td>„Cash is king“ – die einzige Zahl, die nicht auf Bewertungsannahmen beruht</td></tr>
+      <tr><td><b>RVPI</b></td><td>Noch nicht realisierter Restwert geteilt durch eingezahltes Kapital</td><td>Beruht auf Schätzungen des GP; TVPI = DPI + RVPI</td></tr>
+      <tr><td><b>PME</b></td><td>Public Market Equivalent: Vergleich mit einer hypothetischen Anlage im Aktienindex zu denselben Zeitpunkten</td><td>Beantwortet die eigentliche Frage: Hat sich die Illiquidität gelohnt?</td></tr>
+    </tbody>
+  </table></div>
+  <div class="note"><b>Streuung ist alles:</b> Der Unterschied zwischen guten und schlechten PE-Fonds ist weit größer als bei Aktienfonds. Ob ein Anleger Zugang zu den besten Managern hat, entscheidet daher mehr über den Erfolg als die Anlageklasse selbst. Die Frage, ob Private Equity <em>im Durchschnitt</em> nach Gebühren den breiten Aktienmarkt schlägt, ist in der Forschung umstritten – die Antworten hängen stark vom Zeitraum, vom Vergleichsindex und der Datenquelle ab.</div>
+</section>
+
+<!-- 9 -->
+<section id="markt">
+  <div class="sec-no">09</div>
+  <h2>Die Marktlage 2026</h2>
+  <p class="lead">Die Branche hat nach dem Zinsschock von 2022 eine zähe Phase hinter sich. 2026 zeigt ein gemischtes Bild.</p>
+  <div class="grid">
+    <div class="card"><span class="tag">Deals</span><h4>Aktivität stabil</h4><p>Trotz geopolitischer Unsicherheit lief das Dealgeschäft im ersten Quartal 2026 robust. Zusätzlich stützen stabilere Finanzierungskosten neue Übernahmen.<sup>[1][2]</sup></p></div>
+    <div class="card"><span class="tag">Fundraising</span><h4>Zähes Kapitalsammeln</h4><p>2025 war laut PitchBook das schwächste Fundraising-Jahr seit 2018, und auch Anfang 2026 blieb es schwierig. Im zweiten Quartal zog das Volumen wieder an.<sup>[3][4]</sup></p></div>
+    <div class="card"><span class="tag">Exits</span><h4>Stau bei den Verkäufen</h4><p>Viele Fonds halten Beteiligungen länger als geplant. Weil Ausschüttungen fehlen, zögern LPs mit neuen Zusagen – ein Teufelskreis.<sup>[5][6]</sup></p></div>
+    <div class="card"><span class="tag">Dry Powder</span><h4>Viel Geld, aber sinkend</h4><p>Noch nicht investiertes Kapital wird je nach Abgrenzung auf rund 2 Billionen US-Dollar geschätzt. Es ist aber von seinen Höchstständen zurückgegangen.<sup>[2][6]</sup></p></div>
+  </div>
+  <h3>Was die Branche gerade umtreibt</h3>
+  <ul>
+    <li><b>Konzentration:</b> Neues Kapital fließt überproportional zu den größten Häusern, kleinere Manager haben es schwer.</li>
+    <li><b>Liquiditätslösungen:</b> Continuation Vehicles, NAV-Kredite (Darlehen auf den Portfoliowert) und Secondaries sollen den Exit-Stau lösen.</li>
+    <li><b>Private Credit:</b> Kreditfonds ersetzen zunehmend Banken bei der Buyout-Finanzierung.</li>
+    <li><b>Öffnung für Privatanleger:</b> Große Häuser entwickeln Produkte für vermögende Privatkunden, um neue Geldquellen zu erschließen (siehe Abschnitt 11).</li>
+    <li><b>KI und Technologie:</b> sowohl als Investitionsthema (Rechenzentren, Software) als auch intern zur Effizienzsteigerung in Sourcing und Due Diligence.</li>
+  </ul>
+  <p style="font-size:.88rem;color:var(--muted)">Marktzahlen ändern sich laufend und unterscheiden sich je nach Datenanbieter und Definition. Quellen am Seitenende.</p>
+</section>
+
+<!-- 10 -->
+<section id="kritik">
+  <div class="sec-no">10</div>
+  <h2>Heuschrecken oder Retter? Die Debatte</h2>
+  <p class="lead">Kaum eine Anlageklasse polarisiert so stark. In Deutschland prägte 2005 der damalige SPD-Vorsitzende Franz Müntefering mit seinem Heuschrecken-Vergleich die Debatte über Finanzinvestoren nachhaltig.</p>
+  <div class="two">
+    <div class="card pro"><h4>Was Befürworter anführen</h4><ul>
+      <li>Kapital und Know-how für Unternehmen, die an der Börse keinen Platz hätten – etwa bei Nachfolgeproblemen im Mittelstand</li>
+      <li>Aktive Eigentümer mit langem Atem statt Quartalsdruck der Börse</li>
+      <li>Professionalisierung von Management, Controlling und Digitalisierung</li>
+      <li>Renditen für Pensionskassen und damit für spätere Renten vieler Beschäftigter</li>
+      <li>Studien finden in manchen Fällen Produktivitätsgewinne und Wachstum nach Übernahmen</li>
+    </ul></div>
+    <div class="card con"><h4>Was Kritiker anführen</h4><ul>
+      <li>Hohe Verschuldung macht Unternehmen krisenanfällig. Bei Problemen steigt das Insolvenzrisiko</li>
+      <li>Kostensenkungen gehen teils zulasten von Beschäftigten, Qualität oder Investitionen</li>
+      <li>Sale-and-Leaseback und Sonderausschüttungen („Dividend Recaps“) können Substanz entziehen</li>
+      <li>Steuerliche Vorteile: Zinsabzug der Kaufkredite, günstige Besteuerung des Carried Interest</li>
+      <li>Umstrittene Engagements in sensiblen Bereichen wie Pflegeheimen, Arztpraxen oder Tierkliniken</li>
+    </ul></div>
+  </div>
+  <p>Die empirische Forschung zeichnet ein differenziertes Bild: Die Effekte hängen stark vom Deal-Typ ab. Übernahmen von Familienunternehmen oder Konzernabspaltungen gehen eher mit Wachstum einher. Hoch verschuldete Übernahmen in schwierigen Phasen oder Weiterverkäufe zwischen Finanzinvestoren zeigen eher Belastungen. Ein Pauschalurteil wird der Branche in keiner Richtung gerecht.</p>
+</section>
+
+<!-- 11 -->
+<section id="anleger">
+  <div class="sec-no">11</div>
+  <h2>Kann ich als Privatanleger investieren?</h2>
+  <p class="lead">Klassische PE-Fonds verlangen Mindestanlagen im Millionenbereich. Es gibt aber Wege mit niedrigeren Einstiegshürden – jeweils mit eigenen Haken.</p>
+  <div class="grid">
+    <div class="card"><span class="tag">Börse</span><h4>Börsennotierte PE-Firmen &amp; Beteiligungsgesellschaften</h4><p>Aktien von PE-Managern oder von Gesellschaften, die selbst in PE-Fonds investieren. Täglich handelbar, schwanken aber wie Aktien und notieren oft mit Ab- oder Aufschlag zum inneren Wert.</p></div>
+    <div class="card"><span class="tag">EU-Fondsrahmen</span><h4>ELTIF</h4><p>Der „European Long-Term Investment Fund“ wurde mit der Reform ELTIF 2.0 (seit 2024) für Privatanleger geöffnet. Er erlaubt kleinere Beträge, ist aber teils lange gebunden und hat oft höhere Kosten.</p></div>
+    <div class="card"><span class="tag">Semi-liquide</span><h4>Evergreen-Fonds</h4><p>Offene Fonds ohne feste Laufzeit mit begrenzten Rücknahmemöglichkeiten. Bei vielen Rückgabewünschen können Rücknahmen beschränkt werden.</p></div>
+    <div class="card"><span class="tag">Dachfonds</span><h4>Fund-of-Funds &amp; Feeder</h4><p>Bündeln Anlegergeld für Top-Fonds. Streuen das Risiko breit, aber es fällt eine zweite Gebührenebene an.</p></div>
+  </div>
+  <div class="note"><b>Worauf achten:</b> Gesamtkosten, Laufzeit und Rückgaberegeln, die Bewertungsmethode (wie aktuell sind die ausgewiesenen Werte?) und welcher Anteil am Gesamtvermögen dauerhaft gebunden sein darf. Private Equity ist eine Beimischung, kein Basisinvestment.</div>
+</section>
+
+<!-- 12 -->
+<section id="faq">
+  <div class="sec-no">12</div>
+  <h2>Häufige Fragen</h2>
+  <details><summary>Was ist der Unterschied zwischen Private Equity und Hedgefonds?</summary><p>Hedgefonds handeln überwiegend mit börsennotierten Wertpapieren und Derivaten, oft kurzfristig und mit Leerverkäufen. PE-Fonds kaufen ganze Unternehmen oder große Anteile, halten sie mehrere Jahre und beteiligen sich aktiv an der Führung.</p></details>
+  <details><summary>Warum heißen die Kennzahlen alle „EBITDA-Multiple“?</summary><p>EBITDA (Gewinn vor Zinsen, Steuern und Abschreibungen) dient als Näherung für den operativen Cashflow, aus dem Zinsen und Tilgung bezahlt werden. Deshalb werden Kaufpreise und Verschuldung üblicherweise als Vielfaches davon ausgedrückt – etwa „10× EBITDA Kaufpreis, 5× EBITDA Schulden“.</p></details>
+  <details><summary>Wer bekommt bei einer Insolvenz was?</summary><p>Zuerst werden die Gläubiger bedient, die Eigenkapitalgeber kommen zuletzt. Der PE-Fonds verliert dann meist seinen Einsatz. Weil die Schulden beim Unternehmen liegen, haftet der Fonds aber nicht mit seinen anderen Beteiligungen.</p></details>
+  <details><summary>Wie wird Private Equity in Deutschland reguliert?</summary><p>PE-Fondsmanager fallen unter die EU-Richtlinie für Verwalter alternativer Investmentfonds (AIFMD), die in Deutschland im Kapitalanlagegesetzbuch (KAGB) umgesetzt ist. Die BaFin beaufsichtigt Registrierung bzw. Erlaubnis, Risikomanagement und Berichtspflichten. Die Portfoliounternehmen selbst unterliegen dem normalen Gesellschafts-, Arbeits- und Kartellrecht.</p></details>
+  <details><summary>Was ist ein „Dividend Recap“?</summary><p>Das Portfoliounternehmen nimmt zusätzliche Kredite auf und schüttet das Geld an den PE-Fonds aus. Der Fonds holt so einen Teil seines Einsatzes früh zurück, und der IRR steigt. Das Unternehmen trägt dafür eine höhere Schuldenlast.</p></details>
+</section>
+
+<!-- 13 -->
+<section id="glossar">
+  <div class="sec-no">13</div>
+  <h2>Glossar</h2>
+  <dl class="glossar">
+    <dt>Add-on</dt><dd>Zukauf eines kleineren Unternehmens durch ein bestehendes Portfoliounternehmen (Plattform).</dd>
+    <dt>Capital Call</dt><dd>Abruf eines Teils der zugesagten Gelder durch den GP.</dd>
+    <dt>Carried Interest</dt><dd>Gewinnbeteiligung des GP, typischerweise rund 20 %.</dd>
+    <dt>Catch-up</dt><dd>Phase im Wasserfall, in der der GP nach Erreichen der Hurdle bevorzugt Gewinne erhält, bis sein Carry-Anteil erreicht ist.</dd>
+    <dt>Commitment</dt><dd>Verbindliche Kapitalzusage eines LP an den Fonds.</dd>
+    <dt>Continuation Vehicle</dt><dd>Neuer Fonds desselben GP, in den Beteiligungen aus einem alten Fonds übertragen werden.</dd>
+    <dt>Covenant</dt><dd>Kreditauflage, z. B. eine maximale Verschuldung im Verhältnis zum EBITDA.</dd>
+    <dt>DPI</dt><dd>Distributed to Paid-In: tatsächlich ausgezahlter Betrag im Verhältnis zum eingezahlten Kapital.</dd>
+    <dt>Dry Powder</dt><dd>Zugesagtes, aber noch nicht investiertes Kapital.</dd>
+    <dt>Due Diligence</dt><dd>Sorgfältige Prüfung eines Zielunternehmens vor dem Kauf.</dd>
+    <dt>EBITDA</dt><dd>Ergebnis vor Zinsen, Steuern und Abschreibungen; zentrale Bezugsgröße für Bewertung und Verschuldung.</dd>
+    <dt>Exit</dt><dd>Verkauf einer Beteiligung: Trade Sale, Secondary Buyout, IPO oder Continuation Vehicle.</dd>
+    <dt>GP / LP</dt><dd>General Partner (verwaltender Partner, die PE-Firma) und Limited Partners (Kapitalgeber).</dd>
+    <dt>Hurdle Rate</dt><dd>Mindestrendite für LPs, bevor Carry fällig wird – häufig 8 % p. a.</dd>
+    <dt>IRR</dt><dd>Interner Zinsfuß; jährliche Rendite unter Berücksichtigung der Zahlungszeitpunkte.</dd>
+    <dt>LBO</dt><dd>Leveraged Buyout: Übernahme mit hohem Fremdkapitalanteil.</dd>
+    <dt>MOIC / TVPI</dt><dd>Vielfaches des eingesetzten Kapitals (Multiple on Invested Capital / Total Value to Paid-In).</dd>
+    <dt>NAV-Kredit</dt><dd>Kredit an einen Fonds, besichert durch den Wert (Net Asset Value) seines Portfolios.</dd>
+    <dt>Secondary Buyout</dt><dd>Verkauf eines Unternehmens von einem Finanzinvestor an einen anderen.</dd>
+    <dt>Vintage</dt><dd>Auflagejahr eines Fonds; Fonds desselben Jahrgangs werden miteinander verglichen.</dd>
+  </dl>
+</section>
+
+<section id="quellen">
+  <h2 style="font-size:1.3rem">Quellen zur Marktlage</h2>
+  <ol class="sources">
+    <li><a href="https://www.foley.com/insights/publications/2026/04/private-equity-in-q1-2026-resilient-activity-constrained-capital-environment/" rel="noopener">Foley &amp; Lardner: Private Equity in Q1 2026 (April 2026)</a></li>
+    <li><a href="https://en.lider.media/?p=217369" rel="noopener">Lider: Private equity in 2026 withstands shocks (PitchBook-Daten)</a></li>
+    <li><a href="https://pitchbook.com/news/articles/pe-does-not-blink-in-the-face-of-new-market-disruptions" rel="noopener">PitchBook: PE does not blink in the face of new market disruptions</a></li>
+    <li><a href="https://www.aranca.com/knowledge-library/special-reports/business-research/global-private-equity-factbook-q2-2026" rel="noopener">Aranca: Global Private Equity Factbook Q2 2026</a></li>
+    <li><a href="https://quartr.com/events/pantheon-international-plc-pin-cmd-2026-presentation_FGlUb02b" rel="noopener">Pantheon International: Capital Markets Day 2026 (Zusammenfassung)</a></li>
+    <li><a href="https://www.spglobal.com/market-intelligence/en/news-insights/articles/2025/12/private-equity-dry-powder-recedes-from-all-time-highs-amid-slow-fundraising-96015525" rel="noopener">S&amp;P Global: Private equity dry powder recedes from all-time highs (Dez. 2025)</a></li>
+  </ol>
+</section>
+
+</main>
+
+<footer>
+  <p class="disc"><b>Hinweis:</b> Diese Seite dient ausschließlich der allgemeinen Information und ist keine Anlage-, Steuer- oder Rechtsberatung. Beispielrechnungen sind stark vereinfacht. Private-Equity-Anlagen sind illiquide und können zum Totalverlust führen.</p>
+  <p>Playground-Demoseite · Stand November 2026 · ohne Cookies, Tracking oder externe Ressourcen</p>
+</footer>
+<a class="totop" href="#" aria-label="Nach oben">↑</a>
+
+<script>
+(function(){
+  const $ = id => document.getElementById(id);
+  const fmt = (v,d=0) => v.toLocaleString('de-DE',{minimumFractionDigits:d,maximumFractionDigits:d});
+  const mio = v => fmt(v, Math.abs(v)<100?1:0) + ' Mio. €';
+
+  // ---------- LBO ----------
+  const ids = ['ebitda','entry','debtPct','growth','exitM','years','paydown'];
+  function lbo(){
+    const E=+$('ebitda').value, M=+$('entry').value, D=+$('debtPct').value/100,
+          g=+$('growth').value/100, X=+$('exitM').value, n=+$('years').value, p=+$('paydown').value/100;
+    $('o_ebitda').textContent=fmt(E)+' Mio.'; $('o_entry').textContent=fmt(M,1)+'×';
+    $('o_debt').textContent=fmt(D*100)+' %'; $('o_growth').textContent=(g>0?'+':'')+fmt(g*100)+' %';
+    $('o_exit').textContent=fmt(X,1)+'×'; $('o_years').textContent=n; $('o_paydown').textContent=fmt(p*100)+' %';
+
+    const ev=E*M, debt=ev*D, eqIn=ev-debt;
+    const exE=E*Math.pow(1+g,n), exEV=exE*X;
+    const remDebt=Math.max(0,debt*(1-p*n));
+    const eqOut=Math.max(0,exEV-remDebt);
+    const moic=eqIn>0?eqOut/eqIn:0;
+    const irr=moic>0?Math.pow(moic,1/n)-1:-1;
+
+    $('r_eqIn').textContent=mio(eqIn); $('r_eqOut').textContent=mio(eqOut);
+    $('r_moic').textContent=fmt(moic,2)+'×';
+    const irrEl=$('r_irr'); irrEl.textContent=(irr>-1?fmt(irr*100,1):'−100')+' %';
+    irrEl.style.color=irr>=0.15?'var(--green)':irr<0?'var(--red)':'var(--ink)';
+
+    const parts=[
+      ['EBITDA-Wachstum',(exE-E)*M,'var(--green)'],
+      ['Multiple-Effekt',(X-M)*exE,'var(--blue)'],
+      ['Entschuldung',debt-remDebt,'var(--gold)']
+    ];
+    const max=Math.max(1,...parts.map(x=>Math.abs(x[1])));
+    $('bars').innerHTML=parts.map(([l,v,c])=>
+      `<div class="bar"><span>${l}</span><div class="track"><div class="fill" style="width:${Math.abs(v)/max*100}%;background:${v<0?'var(--red)':c}"></div></div><span class="val">${v>=0?'+':''}${fmt(v,0)}</span></div>`).join('');
+
+    let hint='';
+    if(exEV<remDebt) hint='Der Unternehmenswert beim Exit liegt unter den Restschulden – das Eigenkapital ist komplett verloren.';
+    else if(irr>=0.25) hint='Eine IRR über 25 % gilt in der Branche als hervorragend. Prüfe, wie viel davon allein aus dem Multiple-Effekt kommt.';
+    else if(irr>=0.15) hint='Viele Buyout-Fonds peilen brutto etwa 20 % IRR bzw. 2–3× MOIC an – dieses Szenario liegt im üblichen Zielkorridor.';
+    else if(irr>=0) hint='Positiv, aber unter typischen Zielrenditen. Nach Gebühren bliebe für LPs womöglich weniger als mit einem Aktien-ETF.';
+    else hint='Verlust: Hier zeigt sich die Kehrseite des Hebels.';
+    $('lboHint').textContent=hint;
+  }
+  ids.forEach(i=>$(i).addEventListener('input',lbo)); lbo();
+
+  // ---------- Wasserfall ----------
+  function wf(){
+    const C=+$('cap').value, gm=+$('gm').value, n=+$('wy').value, h=+$('hr').value/100, c=+$('ci').value/100;
+    $('o_cap').textContent=fmt(C)+' Mio.'; $('o_gm').textContent=fmt(gm,1)+'×';
+    $('o_wy').textContent=n; $('o_hr').textContent=fmt(h*100)+' %'; $('o_ci').textContent=fmt(c*100)+' %';
+
+    let rest=C*gm;
+    const t1=Math.min(rest,C); rest-=t1;                       // Kapitalrückzahlung
+    const pref=C*(Math.pow(1+h,n)-1);
+    const t2=Math.min(rest,pref); rest-=t2;                    // Preferred Return
+    const cuNeed=c>=1?Infinity:t2*c/(1-c);
+    const t3=Math.min(rest,cuNeed); rest-=t3;                  // Catch-up (100 % an GP)
+    const t4gp=rest*c, t4lp=rest*(1-c);                        // Split
+    const lp=t1+t2+t4lp, gp=t3+t4gp, profit=C*gm-C;
+
+    const rows=[
+      ['1 · Kapital zurück',t1,'var(--navy)','LP'],
+      ['2 · Hurdle (Pref.)',t2,'var(--blue)','LP'],
+      ['3 · Catch-up',t3,'var(--gold)','GP'],
+      ['4 · Split LP',t4lp,'var(--green)','LP'],
+      ['4 · Split GP',t4gp,'var(--gold)','GP']
+    ];
+    const max=Math.max(1,...rows.map(r=>r[1]));
+    $('wfBars').innerHTML=rows.map(([l,v,col])=>
+      `<div class="bar"><span>${l}</span><div class="track"><div class="fill" style="width:${v/max*100}%;background:${col}"></div></div><span class="val">${fmt(v,0)}</span></div>`).join('');
+    $('w_profit').textContent=mio(profit);
+    $('w_lp').textContent=mio(lp);
+    $('w_gp').textContent=mio(gp);
+    $('w_net').textContent=fmt(lp/C,2)+'×';
+  }
+  ['cap','gm','wy','hr','ci'].forEach(i=>$(i).addEventListener('input',wf)); wf();
+})();
+</script>
+</body>
+</html>
