@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Gedächtnis trainieren – Tipps & Mini-Trainer</title>
+<style>
+  :root{--bg:#f6f3ee;--ink:#1f2328;--muted:#5d646d;--accent:#2f6f5e;--accent2:#e3efe9;--card:#fff;--line:#e2ddd4}
+  @media (prefers-color-scheme: dark){:root{--bg:#15181b;--ink:#ecebe8;--muted:#a3a9b0;--accent:#7cc4ab;--accent2:#1f2e29;--card:#1d2125;--line:#2c3237}}
+  *{box-sizing:border-box}
+  body{margin:0;font-family:system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;background:var(--bg);color:var(--ink);line-height:1.6}
+  header{padding:3.5rem 1.25rem 2rem;max-width:860px;margin:auto}
+  header small{color:var(--accent);font-weight:600;letter-spacing:.08em;text-transform:uppercase}
+  h1{font-family:Georgia,"Times New Roman",serif;font-size:clamp(2rem,6vw,3.2rem);line-height:1.1;margin:.4rem 0 1rem}
+  header p{color:var(--muted);font-size:1.1rem;max-width:40rem}
+  nav{position:sticky;top:0;background:var(--bg);border-bottom:1px solid var(--line);z-index:5}
+  nav div{max-width:860px;margin:auto;display:flex;gap:1.2rem;padding:.7rem 1.25rem;overflow-x:auto}
+  nav a{color:var(--ink);text-decoration:none;font-size:.95rem;white-space:nowrap}
+  nav a:hover{color:var(--accent)}
+  main{max-width:860px;margin:auto;padding:0 1.25rem 4rem}
+  section{padding-top:2.5rem}
+  h2{font-family:Georgia,serif;font-size:1.7rem;margin:0 0 1rem}
+  .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:1rem}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:1.2rem}
+  .card h3{margin:.2rem 0 .4rem;font-size:1.05rem}
+  .card p{margin:0;color:var(--muted);font-size:.95rem}
+  .num{display:inline-block;width:1.8rem;height:1.8rem;border-radius:50%;background:var(--accent2);color:var(--accent);text-align:center;font-weight:700;line-height:1.8rem;font-size:.9rem}
+  ul.habits{padding-left:1.2rem}ul.habits li{margin:.35rem 0}
+  .trainer{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:1.5rem;text-align:center}
+  .display{font-family:ui-monospace,Consolas,monospace;font-size:clamp(1.8rem,7vw,2.8rem);letter-spacing:.25em;min-height:3.6rem;margin:1rem 0}
+  .stats{display:flex;justify-content:center;gap:2rem;color:var(--muted);font-size:.95rem}
+  .stats b{color:var(--ink);font-size:1.3rem;display:block}
+  input{font:inherit;font-family:ui-monospace,Consolas,monospace;font-size:1.4rem;letter-spacing:.2em;text-align:center;padding:.6rem;border-radius:10px;border:1px solid var(--line);background:var(--bg);color:var(--ink);width:min(320px,100%)}
+  button{font:inherit;font-weight:600;background:var(--accent);color:#fff;border:0;border-radius:10px;padding:.7rem 1.4rem;cursor:pointer;margin:.6rem .3rem}
+  @media (prefers-color-scheme: dark){button{color:#10201b}}
+  button:disabled{opacity:.4;cursor:default}
+  .msg{min-height:1.6rem;font-weight:600}
+  .ok{color:var(--accent)}.bad{color:#c2533b}
+  footer{text-align:center;color:var(--muted);font-size:.85rem;padding:2rem 1rem;border-top:1px solid var(--line)}
+</style>
+</head>
+<body>
+<header>
+  <small>Playground · Gedächtnis</small>
+  <h1>Wie man sein Gedächtnis trainiert</h1>
+  <p>Das Gedächtnis ist kein fester Speicher, sondern eher ein Muskel: Was regelmäßig abgerufen, verknüpft und gut „verpackt“ wird, bleibt hängen. Hier sind die wirksamsten Methoden – und unten ein kleiner Trainer zum Ausprobieren.</p>
+</header>
+<nav><div>
+  <a href="#techniken">Techniken</a><a href="#alltag">Alltag</a><a href="#trainer">Trainer</a><a href="#mythen">Mythen</a>
+</div></nav>
+<main>
+  <section id="techniken">
+    <h2>Fünf Techniken, die wirklich helfen</h2>
+    <div class="grid">
+      <div class="card"><span class="num">1</span><h3>Aktiv abrufen</h3><p>Statt Notizen nochmal zu lesen: Buch zu, aufschreiben, was du noch weißt. Das Abrufen selbst festigt die Erinnerung.</p></div>
+      <div class="card"><span class="num">2</span><h3>Verteilt wiederholen</h3><p>Lieber 4× kurz über mehrere Tage als 1× lang. Die Abstände wachsen: nach 1 Tag, 3 Tagen, 1 Woche, 1 Monat.</p></div>
+      <div class="card"><span class="num">3</span><h3>Gedächtnispalast</h3><p>Lege Dinge im Kopf an Orten eines vertrauten Weges ab – Haustür, Flur, Küche – und geh ihn beim Erinnern ab.</p></div>
+      <div class="card"><span class="num">4</span><h3>Bündeln (Chunking)</h3><p>Aus 0151 4382 907 werden drei Häppchen statt elf Ziffern. Das Arbeitsgedächtnis fasst etwa 4 Einheiten.</p></div>
+      <div class="card"><span class="num">5</span><h3>Bilder & Geschichten</h3><p>Absurde, lebendige Bilder merken wir uns besser als abstrakte Wörter. Verknüpfe Neues mit Bekanntem.</p></div>
+    </div>
+  </section>
+
+  <section id="alltag">
+    <h2>Was im Alltag den Unterschied macht</h2>
+    <ul class="habits">
+      <li><strong>Schlaf:</strong> Im Tiefschlaf wird Gelerntes vom Kurzzeit- ins Langzeitgedächtnis übertragen.</li>
+      <li><strong>Bewegung:</strong> Ausdauersport fördert die Durchblutung und das Wachstum im Hippocampus.</li>
+      <li><strong>Aufmerksamkeit:</strong> Was man nicht bewusst wahrnimmt, kann man nicht speichern – Multitasking ist der Feind.</li>
+      <li><strong>Erklären:</strong> Wer etwas einem anderen erklärt, versteht und behält es deutlich besser.</li>
+      <li><strong>Neues lernen:</strong> Eine Sprache, ein Instrument, ein neuer Weg zur Arbeit – Neuheit hält das Gehirn flexibel.</li>
+    </ul>
+  </section>
+
+  <section id="trainer">
+    <h2>Mini-Trainer: Zahlenspanne</h2>
+    <div class="trainer">
+      <p style="color:var(--muted);margin:0">Merke dir die Ziffernfolge, sie verschwindet nach kurzer Zeit. Tipp: in Gruppen bündeln!</p>
+      <div class="display" id="display">· · ·</div>
+      <div id="inputWrap" hidden>
+        <input id="answer" inputmode="numeric" autocomplete="off" aria-label="Deine Antwort"><br>
+        <button id="check">Prüfen</button>
+      </div>
+      <div class="msg" id="msg"></div>
+      <button id="start">Start</button>
+      <div class="stats"><div><b id="level">3</b>Ziffern</div><div><b id="best">–</b>Rekord</div></div>
+    </div>
+  </section>
+
+  <section id="mythen">
+    <h2>Zwei verbreitete Mythen</h2>
+    <div class="grid">
+      <div class="card"><h3>„Wir nutzen nur 10 % unseres Gehirns.“</h3><p>Falsch – bildgebende Verfahren zeigen, dass praktisch alle Hirnregionen aktiv genutzt werden.</p></div>
+      <div class="card"><h3>„Gehirnjogging-Apps machen schlauer.“</h3><p>Man wird vor allem besser in genau diesen Spielen. Der Transfer auf den Alltag ist gering – echte Lernaufgaben bringen mehr.</p></div>
+    </div>
+  </section>
+</main>
+<footer>Ein Test-Deploy auf dem Playground · erstellt mit Claude</footer>
+
+<script>
+  const $ = id => document.getElementById(id);
+  let level = 3, best = 0, current = "";
+  try { best = parseInt(localStorage.getItem("spanBest")) || 0; } catch(e) {}
+  $("best").textContent = best || "–";
+
+  function newRound(){
+    current = Array.from({length: level}, () => Math.floor(Math.random()*10)).join("");
+    $("display").textContent = current;
+    $("msg").textContent = ""; $("msg").className = "msg";
+    $("inputWrap").hidden = true; $("start").disabled = true;
+    setTimeout(() => {
+      $("display").textContent = "?".repeat(level);
+      $("inputWrap").hidden = false; $("answer").value = ""; $("answer").focus();
+    }, 900 + level * 450);
+  }
+  function check(){
+    const a = $("answer").value.replace(/\D/g, "");
+    $("inputWrap").hidden = true; $("start").disabled = false;
+    if (a === current){
+      $("msg").textContent = "Richtig! Eine Ziffer mehr."; $("msg").className = "msg ok";
+      if (level > best){ best = level; try { localStorage.setItem("spanBest", best); } catch(e) {} $("best").textContent = best; }
+      level++; $("start").textContent = "Weiter";
+    } else {
+      $("msg").textContent = "Leider nicht – es war " + current; $("msg").className = "msg bad";
+      level = Math.max(3, level - 1); $("start").textContent = "Nochmal";
+    }
+    $("display").textContent = "· · ·"; $("level").textContent = level;
+  }
+  $("start").onclick = newRound;
+  $("check").onclick = check;
+  $("answer").addEventListener("keydown", e => { if (e.key === "Enter") check(); });
+</script>
+</body>
+</html>
