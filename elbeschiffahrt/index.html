@@ -5,11 +5,15 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
 <title>Personenschiffahrt Oberelbe</title>
-<meta name="claude:viewport-fit-sides" content="cover">
 <meta name="description" content="Linienfahrten zwischen Pirna und Hřensko sowie Brunch-, Grill-, Weihnachts- und Charterfahrten in der Sächsischen Schweiz.">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Young+Serif&family=Figtree:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<link rel="icon" href="img/content/schiffe_pic_sachsenwald.jpg">
+<style>
+/* Schriften lokal eingebunden (keine Verbindung zu Google), Lizenz: SIL OFL, siehe fonts/ */
+@font-face{font-family:"Figtree";src:url("fonts/figtree.woff") format("woff");font-weight:300 900;font-style:normal;font-display:swap}
+@font-face{font-family:"Young Serif";src:url("fonts/young-serif.woff") format("woff");font-weight:400;font-style:normal;font-display:swap}
+@font-face{font-family:"IBM Plex Mono";src:url("fonts/ibm-plex-mono-400.woff") format("woff");font-weight:400;font-style:normal;font-display:swap}
+@font-face{font-family:"IBM Plex Mono";src:url("fonts/ibm-plex-mono-500.woff") format("woff");font-weight:500;font-style:normal;font-display:swap}
+</style>
 <style>
 /* Layout: Die Elbe als Leitlinie. Die Fahrstrecke Pirna → Hřensko zieht sich als Linie durch Startseite, Fahrplan und Preistafel;
    klare Kopfnavigation mit drei Gruppen (Fahrten · Planen · An Bord), ruhige Inhaltsseiten mit fester Spaltenbreite. */
@@ -347,6 +351,7 @@ footer.foot .wrap{padding-block:48px 24px;display:grid;gap:36px}
 .foot .brand-f b{font:400 1.3rem var(--f-display);color:var(--on-river);display:block;margin-bottom:8px}
 .foot-bottom{border-top:1px solid rgba(255,255,255,.12);padding-top:18px;display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;font-size:.85rem}
 .toast{position:fixed;left:50%;bottom:max(20px,env(safe-area-inset-bottom,0px));transform:translateX(-50%);background:var(--ink);color:var(--paper);padding:10px 16px;border-radius:999px;font-size:.9rem;z-index:95}
+.changes{list-style:none;padding:0;margin:8px 0;display:grid;gap:6px}.changes b{margin-right:6px}
 </style>
 </head>
 <body>
@@ -549,7 +554,8 @@ footer.foot .wrap{padding-block:48px 24px;display:grid;gap:36px}
         </ul>
       </div>
       <div class="card" id="aenderung"><h3>Aktuelle Fahrplanänderungen</h3>
-        <p class="muted">Bei Hoch- oder Niedrigwasser kann sich der Fahrplan kurzfristig ändern. Derzeit liegen keine Änderungen vor.</p>
+        <p class="muted">Bei Hoch- oder Niedrigwasser kann sich der Fahrplan kurzfristig ändern.</p>
+        <ul class="changes" id="changeList"></ul>
         <p>Tagesaktuelle Auskunft: <span class="mono">0172 / 288 38 64</span></p>
         <p class="muted" style="font-size:.9rem">Bei zu geringer Auslastung kann die Reederei Fahrten absetzen. Ein Anspruch auf Ersatzleistung besteht nicht.</p>
       </div>
@@ -898,19 +904,20 @@ footer.foot .wrap{padding-block:48px 24px;display:grid;gap:36px}
     <div class="crumbs"><a href="#start">Start</a>›<span>Planen</span></div>
     <span class="eyebrow">Das Geschenk für Elbliebhaber</span>
     <h1>Gutscheine</h1>
-    <p class="lead">Verschenken Sie eine Fahrt auf der Elbe. Gutscheine bestellen Sie bequem online.</p>
+    <p class="lead">Verschenken Sie eine Fahrt auf der Elbe. Gutscheine bestellen Sie telefonisch oder per E-Mail bei uns.</p>
   </div></div>
   <div class="section"><div class="wrap split">
     <img src="img/content/gutschein_gutschein.jpg" alt="Gutschein der Personenschiffahrt Oberelbe" loading="lazy">
     <div style="display:grid;gap:18px">
       <h2>So funktioniert es</h2>
       <ul class="list-check">
-        <li><svg class="i"><use href="#i-check"/></svg><span>Bezahlung mit Kredit- oder Debitkarte im Gutscheinshop</span></li>
-        <li><svg class="i"><use href="#i-check"/></svg><span>Der Gutscheincode kommt per E-Mail</span></li>
-        <li><svg class="i"><use href="#i-check"/></svg><span>Mit Druckvorlage oder zum selbst Gestalten</span></li>
-        <li><svg class="i"><use href="#i-check"/></svg><span>Lieber per PayPal oder anders bezahlen? Schreiben Sie uns an <span class="mono">fsv-pirna@elbeschiffahrt-frenzel.de</span>.</span></li>
+        <li><svg class="i"><use href="#i-check"/></svg><span>Schreiben Sie uns, für welchen Betrag oder welche Fahrt Sie einen Gutschein wünschen.</span></li>
+        <li><svg class="i"><use href="#i-check"/></svg><span>Wir melden uns mit allen Details zu Bezahlung und Zustellung.</span></li>
       </ul>
-      <div><a class="btn btn-primary" href="https://giftcard.sumup.io/order/G0OREG3/personenschiffahrt-oberelbe" target="_blank" rel="noopener"><svg class="i"><use href="#i-gift"/></svg>Zum Gutscheinshop</a></div>
+      <div class="card" style="gap:10px">
+        <div class="line-item"><svg class="i"><use href="#i-mail"/></svg><span class="v">fsv-pirna@elbeschiffahrt-frenzel.de</span><button class="copy" data-copy="fsv-pirna@elbeschiffahrt-frenzel.de">Kopieren</button></div>
+        <div class="line-item"><svg class="i"><use href="#i-phone"/></svg><span class="v">03501 / 52 84 67</span></div>
+      </div>
       <p class="muted">Wir wünschen Ihnen viel Freude beim Verschenken und eine schöne Fahrt auf der Elbe.</p>
     </div>
   </div></div>
@@ -935,18 +942,18 @@ footer.foot .wrap{padding-block:48px 24px;display:grid;gap:36px}
 
 <!-- ================= RECHTLICHES ================= -->
 <section class="page" data-page="impressum">
-  <div class="page-head"><div class="wrap"><span class="eyebrow">Angaben gemäß § 5 TMG</span><h1>Impressum</h1></div></div>
+  <div class="page-head"><div class="wrap"><span class="eyebrow">Angaben gemäß § 5 DDG</span><h1>Impressum</h1></div></div>
   <div class="section"><div class="wrap" style="display:grid;gap:32px">
     <div class="cards">
       <div class="card"><h3>Anbieter</h3><p>Personenschiffahrt Oberelbe<br>Waldstraße 45b<br>01796 Pirna</p><p class="muted">Vertreten durch Bernd Frenzel</p></div>
       <div class="card"><h3>Kontakt</h3>
-        <div class="line-item"><span class="muted">Telefon / Fax</span><span class="v">03501 / 52 84 67</span></div>
+        <div class="line-item"><span class="muted">Telefon</span><span class="v">03501 / 52 84 67</span></div>
         <div class="line-item"><span class="muted">Mobil</span><span class="v">0172 / 288 38 64</span></div>
         <div class="line-item"><span class="muted">E-Mail</span><span class="v">info@elbeschiffahrt-frenzel.de</span></div>
       </div>
       <div class="card"><h3>Bildnachweis</h3><p>Michael Edelmann, Peter Reppe, Tim Robel, Thomas Albert, Volkmar Döring, Facebook: „Pirna – Tor zur Sächsischen Schweiz“, Sven Lachmann auf Pixabay</p></div>
     </div>
-    <div class="prose legal"><h3>Haftungsausschluss (Disclaimer)</h3>Haftungsausschluss (Disclaimer)
+    <div class="prose legal"><h3>Haftungsausschluss (Disclaimer)</h3>
 </div>
 
 <h3>Inhalt des Onlineangebotes</h3> 
@@ -954,7 +961,7 @@ footer.foot .wrap{padding-block:48px 24px;display:grid;gap:36px}
 <p>Alle Angebote sind freibleibend und unverbindlich.</p>
 <p>Der Autor behält es sich ausdrücklich vor, Teile der Seiten oder das gesamte Angebot ohne gesonderte Ankündigung zu verändern, zu ergänzen, zu löschen oder die Veröffentlichung zeitweise oder endgültig einzustellen.</p>
 <h3>Haftung für Inhalte</h3>
-<p>Als Diensteanbieter sind wir gemäß § 7 Abs.1 TMG für eigene Inhalte auf diesen Seiten nach den allgemeinen Gesetzen verantwortlich. Nach §§ 8 bis 10 TMG sind wir als Diensteanbieter jedoch nicht verpflichtet, übermittelte oder gespeicherte fremde Informationen zu überwachen oder nach Umständen zu forschen, die auf eine rechtswidrige Tätigkeit hinweisen. Verpflichtungen zur Entfernung oder Sperrung der Nutzung von Informationen nach den allgemeinen Gesetzen bleiben hiervon unberührt. Eine diesbezügliche Haftung ist jedoch erst ab dem Zeitpunkt der Kenntnis einer konkreten Rechtsverletzung möglich. Bei Bekanntwerden von entsprechenden Rechtsverletzungen werden wir diese Inhalte umgehend entfernen.</p>
+<p>Als Diensteanbieter sind wir gemäß § 7 Abs. 1 DDG für eigene Inhalte auf diesen Seiten nach den allgemeinen Gesetzen verantwortlich. Nach §§ 8 bis 10 DDG sind wir als Diensteanbieter jedoch nicht verpflichtet, übermittelte oder gespeicherte fremde Informationen zu überwachen oder nach Umständen zu forschen, die auf eine rechtswidrige Tätigkeit hinweisen. Verpflichtungen zur Entfernung oder Sperrung der Nutzung von Informationen nach den allgemeinen Gesetzen bleiben hiervon unberührt. Eine diesbezügliche Haftung ist jedoch erst ab dem Zeitpunkt der Kenntnis einer konkreten Rechtsverletzung möglich. Bei Bekanntwerden von entsprechenden Rechtsverletzungen werden wir diese Inhalte umgehend entfernen.</p>
 <h3>Haftung für Links</h3>
 <p>Unser Angebot enthält Links zu externen Webseiten Dritter, auf deren Inhalte wir keinen Einfluss haben. Deshalb können wir für diese fremden Inhalte auch keine Gewähr übernehmen. Für die Inhalte der verlinkten Seiten ist stets der jeweilige Anbieter oder Betreiber der Seiten verantwortlich. Die verlinkten Seiten wurden zum Zeitpunkt der Verlinkung auf mögliche Rechtsverstöße überprüft. Rechtswidrige Inhalte waren zum Zeitpunkt der Verlinkung nicht erkennbar. Eine permanente inhaltliche Kontrolle der verlinkten Seiten ist jedoch ohne konkrete Anhaltspunkte einer Rechtsverletzung nicht zumutbar. Bei Bekanntwerden von Rechtsverletzungen werden wir derartige Links umgehend entfernen.</p>
 <h3>Urheberrecht</h3>
@@ -964,7 +971,7 @@ footer.foot .wrap{padding-block:48px 24px;display:grid;gap:36px}
 <section class="page" data-page="agb">
   <div class="page-head"><div class="wrap"><span class="eyebrow">Beförderungs- und Geschäftsbedingungen</span><h1>Allgemeine Geschäftsbedingungen</h1></div></div>
   <div class="section"><div class="wrap"><div class="prose legal"><h3>für die Personenschiffahrt Oberelbe (kurz Reederei)<br>
-für Tagesreisen, Chaterung, Veranstalltungen und Vermittlung von Leistungen</h3>
+für Tagesreisen, Charterung, Veranstaltungen und Vermittlung von Leistungen</h3>
 <br>
 <p>Die Leistungen gegenüber unseren Fahrgästen werden ausschließlich nach dem Recht der Bundesrepublik Deutschland und unserem darauf basierenden nachfolgenden allgemeinen Beförderungsbedingungen erbracht. Mit dem Vertragsabschluss, Spätestens jedoch mit dem Betreten des Schiffes, erkennt der Fahrgast diese Bedingungen für die Rechtsbeziehungen mit uns als verbindlich an.<br>Wir als Reederei erbringen unsere Leistungen, nehmen aber auch Leistungen Dritter in Anspruch bzw. führen die Vermittlung derartiger Leistungen durch im Fall der Inanspruchnahme bzw. Vermittlung von Leistungen Dritter haften wir als Reederei nur, soweit diese Dritten ihrerseits in Anspruch genommen werden können.
 </p>
@@ -1052,7 +1059,7 @@ Wenn die bei uns eingebrachten Sachen gegen Feuer, Wasser, Diebstahl, Beschädig
 <p>Erfüllungsort und Gerichtsstand für alle sich aus dem Vertrag ergebenden Ansprüche ist Regensburg.</p>
 <h3>16. Unwirksamkeit einzelner Bestimmungen</h3>
 <p>Die Unwirksamkeit einzelner Bestimmungen begründet nicht die Unwirksamkeit des gesamten Reisevertrages im Übrigen. In diesem Fall verpflichten sich die Vertragspartner schon jetzt, eine Vereinbarung zu treffen, die dem Sinn und Zweck des Vertrages am nächsten kommt.</p>
-<a style='padding-left:1.5%;' href='downloads/pso_agb.pdf' download='Personenschiffahrt Oberelbe AGB'> </a></div></div></div>
+<p style="margin-top:24px"><a href="downloads/pso_agb.pdf" download="Personenschiffahrt Oberelbe AGB.pdf">AGB als PDF speichern</a></p></div></div></div>
 </section>
 <section class="page" data-page="datenschutz">
   <div class="page-head"><div class="wrap"><span class="eyebrow">Stand 20.06.2025</span><h1>Datenschutzerklärung</h1></div></div>
@@ -1236,30 +1243,9 @@ Wenn die bei uns eingebrachten Sachen gegen Feuer, Wasser, Diebstahl, Beschädig
 <h3>12. Entfallen</h3><br>
 
 
-<h3>13 Verwendung von Google Kalender</h3><br>
-<p>Zur Darstellung von Terminen nutzen wir die Google Calendar API.
-Die Anbindung erfolgt serverseitig über unseren Webserver. Dabei werden keine personenbezogenen Daten der Webseitenbesucher an Google übertragen.
+<h3>13. Entfallen</h3><br>
 
-Anbieter des Dienstes ist Google Ireland Limited, Gordon House, Barrow Street, Dublin 4, Irland. </p>
-
-<h3>14a. Zahlungsart: Datenschutzbestimmungen zu PayPal als Zahlungsart</h3><br>
-<p>Der für die Verarbeitung Verantwortliche hat auf dieser Internetseite Komponenten von PayPal integriert. PayPal ist ein Online-Zahlungsdienstleister. Zahlungen werden über sogenannte PayPal-Konten abgewickelt, die virtuelle Privat- oder Geschäftskonten darstellen. Zudem besteht bei PayPal die Möglichkeit, virtuelle Zahlungen über Kreditkarten abzuwickeln, wenn ein Nutzer kein PayPal-Konto unterhält. Ein PayPal-Konto wird über eine E-Mail-Adresse geführt, weshalb es keine klassische Kontonummer gibt. PayPal ermöglicht es, Online-Zahlungen an Dritte auszulösen oder auch Zahlungen zu empfangen. PayPal übernimmt ferner Treuhänderfunktionen und bietet Käuferschutzdienste an.</p>
-
-<p>Die Europäische Betreibergesellschaft von PayPal ist die PayPal (Europe) S.à.r.l. & Cie. S.C.A., 22-24 Boulevard Royal, 2449 Luxembourg, Luxemburg.</p>
-
-<p>Wählt die betroffene Person während des Bestellvorgangs in unserem Online-Shop als Zahlungsmöglichkeit „PayPal“ aus, werden automatisiert Daten der betroffenen Person an PayPal übermittelt. Mit der Auswahl dieser Zahlungsoption willigt die betroffene Person in die zur Zahlungsabwicklung erforderliche Übermittlung personenbezogener Daten ein.</p>
-
-<p>Bei den an PayPal übermittelten personenbezogenen Daten handelt es sich in der Regel um Vorname, Nachname, Adresse, Email-Adresse, IP-Adresse, Telefonnummer, Mobiltelefonnummer oder andere Daten, die zur Zahlungsabwicklung notwendig sind. Zur Abwicklung des Kaufvertrages notwendig sind auch solche personenbezogenen Daten, die im Zusammenhang mit der jeweiligen Bestellung stehen.</p>
-
-<p>Die Übermittlung der Daten bezweckt die Zahlungsabwicklung und die Betrugsprävention. Der für die Verarbeitung Verantwortliche wird PayPal personenbezogene Daten insbesondere dann übermitteln, wenn ein berechtigtes Interesse für die Übermittlung gegeben ist. Die zwischen PayPal und dem für die Verarbeitung Verantwortlichen ausgetauschten personenbezogenen Daten werden von PayPal unter Umständen an Wirtschaftsauskunfteien übermittelt. Diese Übermittlung bezweckt die Identitäts- und Bonitätsprüfung.</p>
-
-<p>PayPal gibt die personenbezogenen Daten gegebenenfalls an verbundene Unternehmen und Leistungserbringer oder Subunternehmer weiter, soweit dies zur Erfüllung der vertraglichen Verpflichtungen erforderlich ist oder die Daten im Auftrag verarbeitet werden sollen.</p>
-
-<p>Die betroffene Person hat die Möglichkeit, die Einwilligung zum Umgang mit personenbezogenen Daten jederzeit gegenüber PayPal zu widerrufen. Ein Widerruf wirkt sich nicht auf personenbezogene Daten aus, die zwingend zur (vertragsgemäßen) Zahlungsabwicklung verarbeitet, genutzt oder übermittelt werden müssen. </p>
-
-<p>Die geltenden Datenschutzbestimmungen von PayPal können unter https://www.paypal.com/de/webapps/mpp/ua/privacy-full abgerufen werden. </p>
-
-<h3>14b. Zahlungsart: Datenschutzbestimmungen zu SumUp als Zahlungsart (Gutscheinfunktion)</h3><br> <p>Der für die Verarbeitung Verantwortliche hat auf dieser Internetseite Komponenten von SumUp integriert. SumUp ist ein Zahlungsdienstleister, der unter anderem die Erstellung und Verwaltung von Gutscheinen ermöglicht. Die Gutscheinfunktion erlaubt es, digitale oder physische Gutscheine zu erstellen, zu versenden und beim Bezahlvorgang einzulösen. Dabei werden personenbezogene Daten verarbeitet.</p> <p>Betreiberin dieses Dienstes in der Europäischen Union ist die SumUp Limited, Block 8, Harcourt Centre, Charlotte Way, Dublin 2, Irland.</p> <p>Wählt die betroffene Person die Einlösung oder den Kauf eines Gutscheins über SumUp, werden automatisiert Daten der betroffenen Person an SumUp übermittelt. Mit der Auswahl dieser Option willigt die betroffene Person in die zur Durchführung des Gutscheinvorgangs erforderliche Übermittlung personenbezogener Daten ein.</p> <p>Bei den an SumUp übermittelten personenbezogenen Daten handelt es sich in der Regel um Vorname, Nachname, E-Mail-Adresse, Telefonnummer sowie – je nach Nutzung – weitere Daten, die zur Erstellung, Zuordnung oder Einlösung des Gutscheins erforderlich sind. Auch IP-Adressen und technische Nutzungsdaten können durch SumUp verarbeitet werden.</p> <p>Die Übermittlung der Daten dient der Abwicklung des Gutscheinprozesses sowie der Betrugsprävention. Der für die Verarbeitung Verantwortliche wird SumUp personenbezogene Daten insbesondere dann übermitteln, wenn ein berechtigtes Interesse an der Durchführung des Gutscheinvorgangs besteht. SumUp kann diese Daten an Dienstleister oder Subunternehmer weitergeben, soweit dies zur Vertragserfüllung erforderlich ist oder im Rahmen einer Auftragsverarbeitung erfolgt.</p> <p>Die betroffene Person hat die Möglichkeit, die Einwilligung zur Verarbeitung personenbezogener Daten jederzeit gegenüber SumUp zu widerrufen. Ein Widerruf betrifft jedoch nicht die Daten, die zwingend zur Durchführung des Gutscheinvorgangs erforderlich sind.</p> <p>Die geltenden Datenschutzbestimmungen von SumUp können unter https://www.sumup.com/de-de/datenschutzbestimmungen/ abgerufen werden. </p>
+<h3>14. Entfallen</h3><br>
 
 <h3>15. Rechtsgrundlage der Verarbeitung</h3><br>
 <p>Art. 6 I lit. a DS-GVO dient unserem Unternehmen als Rechtsgrundlage für Verarbeitungsvorgänge, bei denen wir eine Einwilligung für einen bestimmten Verarbeitungszweck einholen. Ist die Verarbeitung personenbezogener Daten zur Erfüllung eines Vertrags, dessen Vertragspartei die betroffene Person ist, erforderlich, wie dies beispielsweise bei Verarbeitungsvorgängen der Fall ist, die für eine Lieferung von Waren oder die Erbringung einer sonstigen Leistung oder Gegenleistung notwendig sind, so beruht die Verarbeitung auf Art. 6 I lit. b DS-GVO. Gleiches gilt für solche Verarbeitungsvorgänge die zur Durchführung vorvertraglicher Maßnahmen erforderlich sind, etwa in Fällen von Anfragen zur unseren Produkten oder Leistungen. Unterliegt unser Unternehmen einer rechtlichen Verpflichtung durch welche eine Verarbeitung von personenbezogenen Daten erforderlich wird, wie beispielsweise zur Erfüllung steuerlicher Pflichten, so basiert die Verarbeitung auf Art. 6 I lit. c DS-GVO. In seltenen Fällen könnte die Verarbeitung von personenbezogenen Daten erforderlich werden, um lebenswichtige Interessen der betroffenen Person oder einer anderen natürlichen Person zu schützen. Dies wäre beispielsweise der Fall, wenn ein Besucher in unserem Betrieb verletzt werden würde und daraufhin sein Name, sein Alter, seine Krankenkassendaten oder sonstige lebenswichtige Informationen an einen Arzt, ein Krankenhaus oder sonstige Dritte weitergegeben werden müssten. Dann würde die Verarbeitung auf Art. 6 I lit. d DS-GVO beruhen.
@@ -1315,6 +1301,7 @@ Vor einer Bereitstellung personenbezogener Daten durch den Betroffenen muss sich
   <button class="lb-btn lb-next" id="lbNext" aria-label="Nächstes Foto"><svg class="i"><use href="#i-right"/></svg></button>
 </div>
 
+<script src="daten/termine.js"></script>
 <script>
 (function(){
 const $ = (s, r=document) => r.querySelector(s);
@@ -1342,12 +1329,9 @@ const GROUP = {
   one:[['Pirna','Königstein',18,18.5,19],['Pirna','Bad Schandau',20,20.5,21],['Pirna','Hřensko',24,24.5,25],['Stadt Wehlen','Bad Schandau',18,18.5,19],['Stadt Wehlen','Hřensko',22,22.5,23],['Königstein','Hřensko',20,20.5,21]],
   two:[['Pirna','Königstein',23,23.5,24],['Pirna','Bad Schandau',28,28.5,29],['Pirna','Hřensko',34,34.5,35],['Stadt Wehlen','Bad Schandau',23,23.5,24],['Stadt Wehlen','Hřensko',32,32.5,33],['Königstein','Hřensko',25,25.5,26]]
 };
-const EVENTS = [
-  ['2026-11-29','weihnachten'],['2026-11-30','weihnachten'],['2026-12-01','brunch','full'],
-  ['2026-12-03','weihnachten'],['2026-12-07','weihnachten'],['2026-12-08','weihnachten'],['2026-12-09','weihnachten'],
-  ['2026-12-10','weihnachten'],['2026-12-13','weihnachten'],['2026-12-14','weihnachten',null,'13:30'],
-  ['2026-12-15','weihnachten'],['2026-12-16','weihnachten']
-];
+const DATA = window.PSO_TERMINE || {};
+const EVENTS = DATA.sonderfahrten || [];
+const CHANGES = DATA.aenderungen || [];
 const OFFERS = {
   weihnachten:{
     title:'Weihnachtsfahrten', short:'Weihnachtsfahrt', cal:'Stollenfahrt', tag:['Advent','red'], img:'img/content/weihnachtsfahrt_weihnachtsfahrt01.jpg', imgs:['img/content/weihnachtsfahrt_weihnachtsfahrt01.jpg'],
@@ -1457,6 +1441,12 @@ if (upcoming.length){
   $('#notice').hidden = false;
 }
 
+/* ---------- Fahrplanänderungen ---------- */
+const openChanges = CHANGES.filter(c => d(c[0]) >= TODAY);
+$('#changeList').innerHTML = openChanges.length
+  ? openChanges.map(c => `<li><b class="mono">${fmtShort(d(c[0]))}</b> ${c[1]}</li>`).join('')
+  : '<li class="muted">Derzeit liegen keine Änderungen vor.</li>';
+
 /* ---------- Strecke Startseite ---------- */
 $('#routeStart').innerHTML = STOPS.map((s,i) => `<li><span class="stop"></span><b>${s.name}</b>${s.cz?'<span class="flag-cz">CZ</span>':''}<span class="t">${i===0?'ab ':''}${s.out}</span></li>`).join('');
 
@@ -1467,7 +1457,7 @@ $('#ttBack').innerHTML = [...STOPS].reverse().map((s,i) => ttRow(s, s.back, i===
 
 /* ---------- Angebote ---------- */
 function offerCard(o, href){
-  const price = o.charter ? '416,50 € / Std.' : (o.price ? (typeof o.price === 'number' ? o.price + ' € p. P.' : o.price) : '');
+  const price = o.charter ? '380,80 € / Std.' : (o.price ? (typeof o.price === 'number' ? o.price + ' € p. P.' : o.price) : '');
   return `<a class="offer" href="#${href}"><div class="ph"><img src="${o.img}" alt="" loading="lazy"></div>
     <div class="tx"><span class="tag ${o.tag[1]==='red'?'red':o.tag[1]==='sand'?'sand':''}">${o.tag[0]}</span><h3>${o.title}</h3><p class="muted">${o.teaser}</p>
     <div class="meta">${o.time?`<span>${ic('clock')} ${o.time}</span>`:''}<span class="price">${price}</span></div></div></a>`;
@@ -1477,7 +1467,7 @@ $('#offerGrid').innerHTML = [
   offerCard(OFFERS.grillfahrt,'grillfahrt'), offerCard(OFFERS.musik,'musik'), offerCard(OFFERS.charter,'charter'), offerCard(GROUPS,'gruppen')
 ].join('') ;
 // 7 Kacheln: Reisegruppen-Kachel ersetzen wir nicht, aber die Gutschein-Kachel macht das Raster voll
-$('#offerGrid').insertAdjacentHTML('beforeend', offerCard({title:'Gutscheine', tag:['Geschenk','green'], img:'img/content/gutschein_gutschein.jpg', teaser:'Eine Elbfahrt verschenken, online bestellt.'}, 'gutscheine'));
+$('#offerGrid').insertAdjacentHTML('beforeend', offerCard({title:'Gutscheine', tag:['Geschenk','green'], img:'img/content/gutschein_gutschein.jpg', teaser:'Eine Elbfahrt verschenken, einfach per E-Mail bestellen.'}, 'gutscheine'));
 
 function chips(key){
   return EVENTS.filter(e => e[1]===key).map(e => { const dt=d(e[0]); const past = dt < TODAY;
@@ -1489,7 +1479,7 @@ for (const [key, o] of Object.entries(OFFERS)){
   const sec = $(`[data-page="${key}"]`);
   const dates = EVENTS.some(e => e[1]===key) ? `<div class="card"><h3>Öffentliche Termine</h3><div class="dates">${chips(key)}</div><p class="muted" style="font-size:.88rem">Termine und freie Plätze sind tagesaktuell.${key==='weihnachten'?' Am 14.12. ist Abfahrt bereits um 13:30 Uhr.':''}</p></div>` : '';
   const priceBox = o.charter
-    ? `<div class="price-card"><span class="eyebrow">Charterpreis</span><div class="big">416,50 € <small>pro Stunde</small></div><dl class="kv"><dt>Netto</dt><dd class="mono">350,00 €</dd><dt>MwSt.</dt><dd>19 % enthalten</dd><dt>Vor- und Nachbereitung</dt><dd>+ 1 Stunde</dd></dl></div>`
+    ? `<div class="price-card"><span class="eyebrow">Charterpreis</span><div class="big">380,80 € <small>pro Stunde</small></div><dl class="kv"><dt>Netto</dt><dd class="mono">320,00 €</dd><dt>MwSt.</dt><dd>19 % enthalten</dd><dt>Vor- und Nachbereitung</dt><dd>+ 1 Stunde</dd></dl></div>`
     : `<div class="price-card"><span class="eyebrow">Preis pro Person</span><div class="big">${o.price} € <small>Erwachsene</small></div><dl class="kv"><dt>Kinder (4–16 Jahre)</dt><dd class="mono">${o.kid} €</dd><dt>Familie (2 Erw. + bis 3 Kinder)</dt><dd class="mono">${o.fam} €</dd></dl></div>`;
   sec.innerHTML = `
   <div class="page-head"><div class="wrap">
@@ -1631,6 +1621,8 @@ function route(){
   else if (ALIASES[h]) h = ALIASES[h];
   if (!$(`[data-page="${h}"]`)) h = 'start';
   $$('.page').forEach(p => p.classList.toggle('on', p.dataset.page===h));
+  const h1 = $(`[data-page="${h}"] h1`);
+  document.title = (h==='start' || !h1) ? 'Personenschiffahrt Oberelbe · Schifffahrt Pirna – Hřensko' : h1.textContent.trim() + ' · Personenschiffahrt Oberelbe';
   $$('nav.main a, .panel a, .drawer a.d').forEach(a => a.classList.toggle('active', a.getAttribute('href')==='#'+h));
   $$('.dd').forEach(dd => { dd.classList.toggle('has-active', !!dd.querySelector('.panel a.active')); dd.classList.remove('open'); });
   if (!drawer.hidden) setDrawer(false);

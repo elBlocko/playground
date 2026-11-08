@@ -1,0 +1,3 @@
+Hier gehört die Datei pso_agb.pdf hinein (AGB als PDF).
+Sie liegt auf dem bisherigen Webserver unter /downloads/pso_agb.pdf
+und kann von dort übernommen werden.
