@@ -1,0 +1,428 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Claude im Büro eines Fahrgastschiff-Betriebs – Kosten, Einrichtung, Nutzen</title>
+<meta name="description" content="Analyse für einen mittelständischen Schifffahrtsbetrieb mit einem Motorschiff: Was Claude kostet, wie man es im Büro einrichtet, wie man es nutzt und wo Kosten sinken.">
+<style>
+:root{
+  color-scheme: light;
+  --bg:#f6f5f1; --surface:#fcfcfb; --line:#e3e1da; --grid:#ecebe6;
+  --text:#0b0b0b; --text2:#52514e; --muted:#7a7873;
+  --s1:#2a78d6; --s2:#eb6834; --s3:#1baf7a; --neutral:#a9a7a0;
+  --accent:#1f5fae; --chip:#e9f1fb;
+}
+@media (prefers-color-scheme: dark){
+  :root{
+    color-scheme: dark;
+    --bg:#121211; --surface:#1a1a19; --line:#2e2d2a; --grid:#262523;
+    --text:#f0efec; --text2:#c3c2b7; --muted:#8f8d86;
+    --s1:#3987e5; --s2:#d95926; --s3:#199e70; --neutral:#6a6863;
+    --accent:#7fb2ef; --chip:#1d2a3a;
+  }
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--text);font:17px/1.6 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
+header.hero{background:linear-gradient(160deg,#0f3b5f,#1f5fae 60%,#2a78d6);color:#fff;padding:56px 20px 40px}
+.wrap{max-width:820px;margin:0 auto;padding:0 20px}
+header.hero .wrap{padding:0}
+.kicker{text-transform:uppercase;letter-spacing:.08em;font-size:13px;opacity:.85;margin:0 0 8px}
+h1{font-size:clamp(28px,4.5vw,42px);line-height:1.15;margin:0 0 14px}
+.lead{font-size:19px;max-width:680px;opacity:.95;margin:0}
+.meta{display:flex;gap:10px;flex-wrap:wrap;margin-top:20px}
+.meta span{background:rgba(255,255,255,.16);border:1px solid rgba(255,255,255,.28);border-radius:999px;padding:4px 12px;font-size:14px}
+nav.toc{background:var(--surface);border-bottom:1px solid var(--line);position:sticky;top:0;z-index:5}
+nav.toc .wrap{display:flex;gap:18px;overflow-x:auto;padding:10px 20px;font-size:14px;white-space:nowrap}
+nav.toc a{color:var(--text2);text-decoration:none}
+nav.toc a:hover{color:var(--accent)}
+main{padding:12px 0 40px}
+section{margin:44px 0}
+h2{font-size:26px;line-height:1.25;margin:0 0 10px}
+h3{font-size:19px;margin:26px 0 8px}
+p{margin:0 0 14px}
+a{color:var(--accent)}
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:12px;margin:22px 0}
+.stat{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:16px}
+.stat b{display:block;font-size:30px;line-height:1.1;font-variant-numeric:tabular-nums}
+.stat span{font-size:14px;color:var(--text2)}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:18px 18px 12px;margin:18px 0}
+.card h4{margin:0 0 2px;font-size:16px}
+.card .sub{margin:0 0 10px;color:var(--text2);font-size:14px}
+.card .note{font-size:13px;color:var(--muted);margin:8px 0 4px}
+svg{display:block;width:100%;height:auto}
+svg text{fill:var(--text2);font:13px system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
+svg .val{fill:var(--text);font-weight:600}
+svg .lbl{fill:var(--text)}
+.bar{cursor:default}
+.bar:hover rect.m,.bar:focus rect.m{opacity:.85}
+#tip{position:fixed;pointer-events:none;background:var(--text);color:var(--surface);padding:6px 10px;border-radius:8px;font-size:13px;opacity:0;transition:opacity .1s;max-width:260px;z-index:20}
+table{width:100%;border-collapse:collapse;font-size:15px;margin:10px 0 16px}
+th,td{text-align:left;padding:9px 10px;border-bottom:1px solid var(--line);vertical-align:top}
+th{font-size:13px;text-transform:uppercase;letter-spacing:.04em;color:var(--text2);font-weight:600}
+td.num,th.num{text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap}
+.tablewrap{overflow-x:auto}
+ol.steps{counter-reset:s;list-style:none;padding:0;margin:14px 0}
+ol.steps li{counter-increment:s;position:relative;padding:0 0 16px 48px}
+ol.steps li::before{content:counter(s);position:absolute;left:0;top:0;width:32px;height:32px;border-radius:50%;background:var(--chip);color:var(--accent);font-weight:700;display:grid;place-items:center}
+ol.steps b{display:block}
+.callout{border-left:4px solid var(--s1);background:var(--surface);padding:12px 16px;border-radius:0 10px 10px 0;margin:16px 0}
+.callout.warn{border-color:var(--s2)}
+.pill{display:inline-block;background:var(--chip);color:var(--accent);border-radius:999px;padding:1px 9px;font-size:13px;font-weight:600}
+details{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:10px 14px;margin:8px 0}
+summary{cursor:pointer;font-weight:600}
+footer{border-top:1px solid var(--line);padding:24px 0 48px;color:var(--text2);font-size:14px}
+footer ol{padding-left:20px}
+</style>
+</head>
+<body>
+<div id="tip" role="tooltip"></div>
+
+<header class="hero">
+  <div class="wrap">
+    <p class="kicker">Analyse · Büro-Automatisierung</p>
+    <h1>Claude im Büro eines Fahrgastschiff-Betriebs</h1>
+    <p class="lead">Was die KI für einen Familienbetrieb mit einem Motorschiff kostet, wie man sie im Büro einrichtet, wofür man sie täglich nutzt – und wo am Ende wirklich Geld gespart wird.</p>
+    <div class="meta">
+      <span id="readtime">Lesezeit: ca. 7 Minuten</span>
+      <span>Stand: November 2026</span>
+      <span>Modellbetrieb, keine echten Firmendaten</span>
+    </div>
+  </div>
+</header>
+
+<nav class="toc" aria-label="Inhalt"><div class="wrap">
+  <a href="#kurz">Kurzfassung</a><a href="#betrieb">Der Betrieb</a><a href="#kosten">Kosten</a><a href="#einrichtung">Einrichtung</a><a href="#nutzung">Nutzung</a><a href="#datev">DATEV</a><a href="#sparen">Ersparnis</a><a href="#grenzen">Grenzen</a><a href="#quellen">Quellen</a>
+</div></nav>
+
+<main class="wrap" id="article">
+
+<section id="kurz">
+  <h2>Kurzfassung</h2>
+  <p>Für ein Büro mit zwei Arbeitsplätzen kostet Claude Team rund <strong>40–50 US-Dollar im Monat</strong>. Das rechnet sich, sobald die KI im Monat etwa zwei Bürostunden spart – in der Saison sind nach unserem Modell rund 20 Stunden realistisch.</p>
+  <div class="stats">
+    <div class="stat"><b>40–50 $</b><span>pro Monat für 2 Standard-Plätze</span></div>
+    <div class="stat"><b>≈ 20 h</b><span>Bürozeit im Saisonmonat (Modell)</span></div>
+    <div class="stat"><b>≈ 2 h</b><span>Ersparnis pro Monat genügt, damit es sich trägt</span></div>
+    <div class="stat"><b>15–35 €</b><span>DATEV-Gebühren pro Monat – bleiben gleich</span></div>
+  </div>
+  <p>Gespart wird vor allem an Bürozeit bei Anfragen, Angeboten und Gäste-Mails. Beim Steuerbüro sinkt der Aufwand, wenn Belege vollständig und vorsortiert ankommen. Die DATEV-Lizenzen selbst werden durch KI nicht billiger.</p>
+</section>
+
+<section id="betrieb">
+  <h2>Der Modellbetrieb</h2>
+  <p>Die Analyse beschreibt einen typischen familiengeführten Fahrgastschiff-Betrieb an einem Binnenfluss. Die Zahlen sind Annahmen und lassen sich mit den eigenen ersetzen.</p>
+  <div class="tablewrap"><table>
+    <thead><tr><th>Merkmal</th><th>Annahme</th></tr></thead>
+    <tbody>
+      <tr><td>Flotte</td><td>1 Motorschiff (Tagesausflugsschiff)</td></tr>
+      <tr><td>Geschäft</td><td>Linienfahrten in der Saison, Charter für Firmen und Feiern, Reisegruppen, Themenfahrten mit Essen (Brunch, Grill, Musik, Advent), Gutscheine</td></tr>
+      <tr><td>Saison</td><td>etwa April bis Dezember, Winter mit Werft- und Planungszeit</td></tr>
+      <tr><td>Personal</td><td>Familie plus kleine Crew, rund 6 Beschäftigte inkl. Saisonkräfte</td></tr>
+      <tr><td>Büro</td><td>2 Arbeitsplätze, ein Firmenpostfach, ein Online-Kalender</td></tr>
+      <tr><td>Buchhaltung</td><td>Steuerbüro mit DATEV, Betrieb liefert Belege zu</td></tr>
+      <tr><td>Belege</td><td>100–200 pro Monat in der Saison</td></tr>
+    </tbody>
+  </table></div>
+  <p>Branchenberichte zeigen dieselben Engpässe: Reservierungslisten, Rechnungen und Abgleiche laufen oft fast komplett von Hand, was in der Hochsaison viel Zeit und Fehler kostet.<sup><a href="#q8">8</a></sup></p>
+</section>
+
+<section id="kosten">
+  <h2>Was Claude kostet</h2>
+  <p>Für Firmen gibt es den Team-Plan. Er braucht <strong>mindestens zwei Mitglieder</strong> – passt also genau zu einem Büro mit zwei Plätzen.<sup><a href="#q1">1</a></sup> Ein Standard-Platz kostet 25 $ im Monat bei monatlicher und 20 $ bei jährlicher Abrechnung. Premium-Plätze (125 $ bzw. 100 $) bringen deutlich mehr Nutzung und Claude Code; ein Büro braucht sie nicht.</p>
+
+  <div class="card">
+    <h4>Monatliche Kosten je nach Platz-Mix</h4>
+    <p class="sub">Claude Team, 2 Plätze, US-Dollar pro Monat, zzgl. USt.</p>
+    <div id="chart-plans"></div>
+    <p class="note">Quelle: Claude Hilfe-Center, Team-Plan.<sup><a href="#q1">1</a></sup> Empfehlung für den Modellbetrieb: 2 × Standard.</p>
+  </div>
+
+  <h3>Jährlich oder monatlich?</h3>
+  <p>Die Jahresabrechnung ist pro Monat 20 % günstiger. Wer Claude nur in der Saison braucht, kommt mit Monatsabrechnung über neun Monate etwas günstiger weg – vorausgesetzt, man kann den Plan im Winter pausieren oder kündigen, ohne Projekte und Einstellungen zu verlieren. Das vor der Entscheidung prüfen.</p>
+  <div class="card">
+    <h4>Jahreskosten für 2 Standard-Plätze</h4>
+    <p class="sub">US-Dollar pro Jahr</p>
+    <div id="chart-billing"></div>
+    <p class="note">Rechnung: 2 Plätze × Monatspreis × Monate.</p>
+  </div>
+
+  <div class="callout">Wichtig für den Datenschutz: Der Team-Plan enthält einen Auftragsverarbeitungsvertrag (AVV), die Privat-Pläne Free und Pro nicht.<sup><a href="#q2">2</a></sup> Für Gästedaten im Büro ist deshalb ein Firmen-Plan die richtige Wahl.</div>
+</section>
+
+<section id="einrichtung">
+  <h2>Einrichtung im Büro</h2>
+  <p>Die Einrichtung dauert rund vier Wochen, wenn man sie neben dem Tagesgeschäft in der Vorsaison macht. Am meisten Zeit kostet nicht die Technik, sondern das Zusammentragen von Preisliste, Paketen und Mustertexten.</p>
+
+  <div class="card">
+    <h4>Fahrplan der Einführung</h4>
+    <p class="sub">Wochen 1–4, am besten im Februar oder März</p>
+    <div id="chart-timeline"></div>
+  </div>
+
+  <ol class="steps">
+    <li><b>Team-Plan buchen</b>Eine Person wird Admin, 2 Standard-Plätze, Abrechnung wählen. Anmeldung mit der Firmen-Mail, nicht privat.</li>
+    <li><b>Desktop-App auf beiden Büro-PCs</b>Claude läuft auch im Browser; die App ist bequemer und kann mit Dateien auf dem PC arbeiten.</li>
+    <li><b>Konnektoren verbinden</b>Firmenpostfach und Kalender (Google Workspace oder Microsoft 365). Nur das verbinden, was gebraucht wird.</li>
+    <li><b>Ein Projekt „Büro“ anlegen</b>Hier liegt das Wissen, das Claude bei jeder Antwort nutzt: Preisliste, Fahrplan, Charter-Pakete, Speisen, AGB, Anfahrt, FAQ, Mustertexte für Angebote und Absagen.</li>
+    <li><b>Hausregeln festlegen</b>Claude schreibt Entwürfe, ein Mensch prüft und sendet. Keine Lohn-, Gesundheits- oder Ausweisdaten in Chats. Mitarbeitende kurz einweisen, Datenschutzerklärung prüfen.</li>
+    <li><b>Belegweg mit dem Steuerbüro klären</b>DATEV Upload Mail einrichten (siehe unten) und einmal mit echten Rechnungen testen.</li>
+    <li><b>Wiederkehrende Aufgaben planen</b>Zum Beispiel jeden Montag: Fristen-Liste prüfen, offene Anfragen auflisten.</li>
+    <li><b>Pilot und Auswertung</b>Vier Wochen in der Vorsaison, dann gemeinsam ansehen: Was hat Zeit gespart, was nicht?</li>
+  </ol>
+</section>
+
+<section id="nutzung">
+  <h2>So wird Claude im Alltag genutzt</h2>
+  <p>Claude ist im Büro vor allem Schreib- und Sortierkraft. Die Entscheidung – Preis, Termin, Zusage – bleibt beim Menschen.</p>
+  <div class="tablewrap"><table>
+    <thead><tr><th>Aufgabe</th><th>So läuft es mit Claude</th><th>Wann</th></tr></thead>
+    <tbody>
+      <tr><td>Charter- und Gruppenanfragen</td><td>„Lies die neuen Anfragen, prüfe den Kalender und schreib Angebote nach unserer Preisliste.“ Claude legt Entwürfe an, das Büro prüft und schickt sie ab.</td><td>täglich</td></tr>
+      <tr><td>Gäste-Mails</td><td>Fragen zu Abfahrt, Parken, Hunden, Rollstuhl, Essen werden aus der FAQ beantwortet – auf Wunsch auch auf Englisch oder in der Sprache des Nachbarlandes.</td><td>täglich</td></tr>
+      <tr><td>Themenfahrten</td><td>Teilnehmerliste aus Reservierungen, Essensmengen für das Catering, Erinnerungs-Mail am Vortag.</td><td>je Fahrt</td></tr>
+      <tr><td>Belege</td><td>Rechnungen im Postfach erkennen, Pflichtangaben prüfen, sauber benennen, an DATEV weiterleiten, offene Posten auflisten.</td><td>wöchentlich</td></tr>
+      <tr><td>Gutscheine</td><td>Gutschein-PDF erstellen, Liste mit Nummer, Wert und Einlösung führen.</td><td>bei Bedarf</td></tr>
+      <tr><td>Fristen</td><td>Liste mit Schiffsuntersuchungen, Versicherungen, Patenten und Tauglichkeitsnachweisen der Crew; rechtzeitige Erinnerung.</td><td>wöchentlich</td></tr>
+      <tr><td>Dienstplan</td><td>Entwurf aus Fahrplan und Verfügbarkeiten der Crew.</td><td>monatlich</td></tr>
+      <tr><td>Texte</td><td>Saisonprogramm, Website-Texte, Aushänge, Social-Media-Beiträge, Antworten auf Bewertungen.</td><td>bei Bedarf</td></tr>
+      <tr><td>Auswertungen</td><td>BWA vom Steuerbüro hochladen und fragen: „Wie lief der September im Vergleich zum Vorjahr? Wo sind die Kosten gestiegen?“</td><td>monatlich</td></tr>
+    </tbody>
+  </table></div>
+  <p>Bei Fristen gibt es harte Pflichten: Schiffsführer müssen ihre medizinische Tauglichkeit zum Beispiel ab 50 alle fünf Jahre und ab 65 jährlich nachweisen.<sup><a href="#q9">9</a></sup> Eine gepflegte Liste mit automatischer Erinnerung senkt das Risiko, dass ein Schiff wegen eines abgelaufenen Nachweises stillsteht.</p>
+</section>
+
+<section id="datev">
+  <h2>DATEV und Steuerbüro</h2>
+  <p>DATEV selbst kostet einen solchen Betrieb laut aktueller Preisliste nur etwa 15–35 € netto im Monat.<sup><a href="#q3">3</a></sup> Der große Posten ist das Steuerbüro, das bucht, Löhne abrechnet und den Abschluss macht.</p>
+
+  <div class="card">
+    <h4>Laufende Kosten für Buchhaltung im Monat</h4>
+    <p class="sub">Euro netto pro Monat, Spanne mit Mittelwert, Modellbetrieb mit 6 Beschäftigten</p>
+    <div id="chart-accounting"></div>
+    <p class="note">DATEV: Unternehmen online 11,56 € + Belege online 3,83 €, optional Belegfreigabe und Auftragswesen.<sup><a href="#q3">3</a></sup> Steuerbüro: Marktspannen 2026.<sup><a href="#q5">5</a></sup> Jahresabschluss kommt dazu.</p>
+  </div>
+
+  <h3>Der Belegweg – was automatisch geht</h3>
+  <p>Fast der ganze Weg der Belege zum Steuerbüro lässt sich automatisieren, und zwar über DATEV-eigene Kanäle, die in der Lizenz schon enthalten sind. Claude sitzt nur am Anfang: beim Postfach.</p>
+  <div class="card">
+    <h4>Vom Beleg zum Steuerbüro</h4>
+    <p class="sub">Blau = Claude beteiligt, grau = läuft über DATEV ohne KI</p>
+    <div id="chart-flow"></div>
+  </div>
+  <ul>
+    <li><strong>Upload Mail:</strong> DATEV vergibt eine eigene Empfangsadresse für Rechnungen. Das Einrichten braucht einmal die DATEV-Anmeldung. Eine automatische Umleitung über Gmail, GMX oder web.de funktioniert laut einer Kanzlei-Anleitung nicht – die Weiterleitung muss als echte Mail vom bestätigten Absender kommen.<sup><a href="#q4">4</a></sup> Genau das kann Claude über den Mail-Konnektor übernehmen; vorher testen.</li>
+    <li><strong>Bank:</strong> Kontoumsätze laufen über Bank online in DATEV Unternehmen online direkt zum Steuerbüro.</li>
+    <li><strong>Bordkasse:</strong> Viele Kassensysteme übertragen den Tagesabschluss per Knopfdruck ins DATEV Kassenarchiv online, wo die Daten zehn Jahre GoBD-konform liegen.<sup><a href="#q6">6</a></sup> Bei Bargeld an Bord ist das der größte Hebel.</li>
+    <li><strong>E-Rechnung:</strong> Rechnungen an Firmen müssen ab 2027 als E-Rechnung raus, wenn der Vorjahresumsatz über 800.000 € lag, sonst ab 2028. Privatkunden sind ausgenommen.<sup><a href="#q7">7</a></sup> Das Rechnungsprogramm muss XRechnung oder ZUGFeRD können.</li>
+  </ul>
+  <div class="callout warn">Eine direkte KI-Verbindung in DATEV hinein lohnt sich für einen kleinen Betrieb derzeit nicht. DATEV bietet selbst keinen MCP-Server an; Lösungen von Drittanbietern setzen auf Kanzlei-Software auf und kosten ab etwa 79 € im Monat.<sup><a href="#q10">10</a></sup></div>
+</section>
+
+<section id="sparen">
+  <h2>Wo und wie Kosten sinken</h2>
+  <p>Die größte Ersparnis ist Bürozeit, nicht Lizenzgeld. Nach unserem Modell spart Claude im Saisonmonat rund 20 Stunden; bei 25 € pro Bürostunde (Arbeitgeberkosten, Annahme) sind das etwa 500 € im Monat.</p>
+
+  <div class="card">
+    <h4>Gesparte Bürostunden im Saisonmonat</h4>
+    <p class="sub">Modellrechnung, Stunden pro Monat</p>
+    <div id="chart-hours"></div>
+    <p class="note">Annahmen: 30 Charteranfragen × 15 Min., 80 Gäste-Mails × 3 Min., 150 Belege × 1 Min., je 2–3 Stunden für Texte, Planung und Fristen, 1 Stunde für Auswertungen.</p>
+  </div>
+
+  <h3>Die fünf Hebel</h3>
+  <div class="tablewrap"><table>
+    <thead><tr><th>Hebel</th><th>Wie gespart wird</th><th class="num">Größe</th></tr></thead>
+    <tbody>
+      <tr><td>Bürozeit</td><td>Entwürfe statt leerer Seite bei Anfragen, Angeboten und Mails; weniger Abtippen.</td><td class="num">groß</td></tr>
+      <tr><td>Mehr Buchungen</td><td>Schnelle Antworten auf Charteranfragen gewinnen eher den Auftrag – gerade in der Hochsaison, wenn Mails sonst liegen bleiben.</td><td class="num">groß</td></tr>
+      <tr><td>Steuerbüro</td><td>Vollständige, benannte Belege bedeuten weniger Suchen und Rückfragen. Ob das Honorar sinkt, hängt davon ab, wie die Kanzlei abrechnet – nachfragen.</td><td class="num">mittel</td></tr>
+      <tr><td>Fehler und Fristen</td><td>Keine vergessenen Untersuchungen, Versicherungen oder Gutscheine; bei der E-Rechnung drohen Bußgelder bis 5.000 €.<sup><a href="#q7">7</a></sup></td><td class="num">mittel</td></tr>
+      <tr><td>Richtige Lizenz</td><td>Standard statt Premium, Abrechnung passend zur Saison.</td><td class="num">klein</td></tr>
+    </tbody>
+  </table></div>
+
+  <div class="card">
+    <h4>Kosten und Nutzen im Saisonmonat</h4>
+    <p class="sub">Euro pro Monat, Modell; Claude-Preis grob in Euro umgerechnet</p>
+    <div id="chart-roi"></div>
+    <p class="note">Die Zeitersparnis ist eine Schätzung. Im Winter ist sie deutlich kleiner – daher die Frage nach der Abrechnungsart.</p>
+  </div>
+</section>
+
+<section id="grenzen">
+  <h2>Grenzen und Risiken</h2>
+  <details open><summary>Claude macht Fehler</summary><p>Preise, Daten und Zusagen in Entwürfen immer prüfen. Die Regel „Claude entwirft, Mensch sendet“ ist der wichtigste Schutz.</p></details>
+  <details><summary>Buchhaltung bleibt beim Steuerbüro</summary><p>Buchen, Umsatzsteuer – etwa bei Fahrten ins Ausland oder dem Bordverkauf – und der Jahresabschluss sind Sache der Kanzlei. Claude hilft beim Zuliefern und Verstehen, nicht beim Buchen.</p></details>
+  <details><summary>Datenschutz</summary><p>Nur den Firmen-Plan mit AVV verwenden, Konnektoren auf das Firmenpostfach beschränken, keine besonders sensiblen Daten der Crew eingeben, Gäste in der Datenschutzerklärung informieren.</p></details>
+  <details><summary>Ein Buchungssystem kann besser passen</summary><p>Bei vielen Einzeltickets mit festen Plätzen pro Fahrt löst ein Ticket- und Buchungssystem mit DATEV-Export das Problem direkter. Claude ergänzt es für alles, was als freier Text per Mail oder Telefon-Notiz hereinkommt.</p></details>
+  <details><summary>Bildschirmsteuerung nicht für DATEV</summary><p>Claude kann Programme bedienen. In DATEV-Anwendungen mit persönlicher Anmeldung sollte man das aus Sicherheits- und Haftungsgründen nicht tun.</p></details>
+</section>
+
+<section>
+  <h2>Nächste Schritte</h2>
+  <ol>
+    <li>Letzte Steuerbüro-Rechnungen ansehen: Was kosten DATEV, Buchhaltung und Löhne wirklich?</li>
+    <li>Mit dem Steuerbüro klären: Ist Unternehmen online mit Belege online und Bank online aktiv? Welchen Belegweg wünscht die Kanzlei?</li>
+    <li>Prüfen, ob die Bordkasse an das DATEV Kassenarchiv online übertragen kann.</li>
+    <li>Rechnungsprogramm auf E-Rechnung prüfen.</li>
+    <li>Claude Team mit 2 Standard-Plätzen buchen und den Pilot in der Vorsaison starten.</li>
+  </ol>
+</section>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    <h2 id="quellen" style="font-size:20px">Quellen</h2>
+    <ol>
+      <li id="q1"><a href="https://support.claude.com/de/articles/9266767">Claude Hilfe-Center: Was ist der Team-Plan?</a></li>
+      <li id="q2"><a href="https://compound.law/de-DE/tools/claude-team/">compound.law: Claude Team, AVV und DSGVO</a></li>
+      <li id="q3"><a href="https://www.datev.de/content/dam/markenassets/preislisten/auszug_der_datev-preisliste_fuer_unternehmen.pdf">DATEV: Auszug der Preisliste für Unternehmen, Stand 08/2026</a></li>
+      <li id="q4"><a href="https://ddp-gruppe.de/wp-content/uploads/2024/12/DATEV-Upload-Mail-einrichten03122024.pdf">ddp-Gruppe: DATEV Upload Mail einrichten</a></li>
+      <li id="q5"><a href="https://taxtify.de/was-kostet-ein-steuerberater/">taxtify: Was kostet ein Steuerberater 2026</a></li>
+      <li id="q6"><a href="https://www.datev.de/web/de/datev-shop/zusatzangebote/datev-kassenarchiv-online/">DATEV: Kassenarchiv online</a></li>
+      <li id="q7"><a href="https://www.sage.com/de-de/blog/e-rechnung-pflicht-2027/">Sage: E-Rechnung Pflicht 2027</a> · <a href="https://www.sage.com/de-de/blog/e-rechnung-versandpflicht-2027-erp/">Versandpflicht 2027</a></li>
+      <li id="q8"><a href="https://travelmanager.de/en/get-started/customer-stories/la-paloma/">Travelmanager: Fallstudie eines Eventschiffs</a></li>
+      <li id="q9"><a href="https://www.brd.nrw.de/system/files/media/document/2023-04/20230414_2_25_Schiffsverkehr_Verordnung_Fahrgastschifffahrt_Faehrverkehr_Ruhr_0.pdf">Bezirksregierung Düsseldorf: Verordnung Fahrgastschifffahrt (Beispiel)</a></li>
+      <li id="q10"><a href="https://innfactory.ai/de/leistungen/companygpt/integrationen/datev/">innFactory: DATEV-Anbindung</a> · <a href="https://www.taxandbytes.de/tools/versus/mcp-for-datev-vs-ai-driven-data-analytics">tax&amp;bytes: MCP for DATEV</a></li>
+    </ol>
+    <p>Diese Seite ist eine allgemeine Analyse für einen Modellbetrieb und keine Steuer- oder Rechtsberatung. Preise ohne Gewähr, Stand November 2026.</p>
+  </div>
+</footer>
+
+<script>
+(function(){
+  // Lesezeit aus dem Artikeltext (ca. 200 Wörter pro Minute)
+  var words=(document.getElementById('article').innerText||'').trim().split(/\s+/).length;
+  document.getElementById('readtime').textContent='Lesezeit: ca. '+Math.max(1,Math.round(words/200))+' Minuten';
+
+  var tip=document.getElementById('tip');
+  function bindTip(el,txt){
+    el.setAttribute('tabindex','0');el.setAttribute('aria-label',txt);
+    el.addEventListener('mousemove',function(e){tip.textContent=txt;tip.style.left=(e.clientX+12)+'px';tip.style.top=(e.clientY+12)+'px';tip.style.opacity=1;});
+    el.addEventListener('mouseleave',function(){tip.style.opacity=0;});
+    el.addEventListener('focus',function(){var r=el.getBoundingClientRect();tip.textContent=txt;tip.style.left=r.left+'px';tip.style.top=(r.bottom+6)+'px';tip.style.opacity=1;});
+    el.addEventListener('blur',function(){tip.style.opacity=0;});
+  }
+  var NS='http://www.w3.org/2000/svg';
+  function el(n,a,p){var e=document.createElementNS(NS,n);for(var k in a)e.setAttribute(k,a[k]);if(p)p.appendChild(e);return e;}
+  function txt(p,x,y,s,cls,anchor){var t=el('text',{x:x,y:y,'class':cls||'','text-anchor':anchor||'start'},p);t.textContent=s;return t;}
+  // Balken links eckig, rechts 4px gerundet
+  function barPath(x,y,w,h,r){r=Math.min(r,w,h/2);return 'M'+x+','+y+'h'+(w-r)+'q'+r+',0 '+r+','+r+'v'+(h-2*r)+'q0,'+r+' -'+r+','+r+'h-'+(w-r)+'z';}
+
+  function hbar(id,data,opt){
+    var W=720,lw=opt.labelW||230,rh=40,top=8,H=top+data.length*rh+28,pw=W-lw-70;
+    var max=opt.max||Math.max.apply(null,data.map(function(d){return d.v;}));
+    var svg=el('svg',{viewBox:'0 0 '+W+' '+H,role:'img','aria-label':opt.aria});
+    // Gitter
+    var ticks=opt.ticks||4;
+    for(var i=0;i<=ticks;i++){var gx=lw+pw*i/ticks;el('line',{x1:gx,x2:gx,y1:top,y2:H-24,stroke:'var(--grid)'},svg);txt(svg,gx,H-8,opt.fmt(max*i/ticks),'', 'middle');}
+    data.forEach(function(d,i){
+      var y=top+i*rh+8,w=Math.max(2,pw*d.v/max);
+      var g=el('g',{'class':'bar'},svg);
+      el('rect',{x:0,y:y-8,width:W,height:rh,fill:'transparent'},g);
+      txt(g,lw-12,y+17,d.l,'lbl','end');
+      el('path',{d:barPath(lw,y,w,24,4),fill:d.c||'var(--s1)','class':'m'},g);
+      txt(g,lw+w+8,y+17,opt.fmt(d.v),'val');
+      bindTip(g,d.l+': '+opt.fmt(d.v)+(d.t?' – '+d.t:''));
+    });
+    document.getElementById(id).appendChild(svg);
+  }
+  var usd=function(v){return Math.round(v).toLocaleString('de-DE')+' $';};
+  var eur=function(v){return Math.round(v).toLocaleString('de-DE')+' €';};
+  var hrs=function(v){return (Math.round(v*10)/10).toLocaleString('de-DE')+' h';};
+
+  hbar('chart-plans',[
+    {l:'2 × Standard, jährlich',v:40,c:'var(--s1)',t:'Empfehlung'},
+    {l:'2 × Standard, monatlich',v:50,c:'var(--s1)'},
+    {l:'Standard + Premium, jährlich',v:120,c:'var(--neutral)'},
+    {l:'2 × Premium, jährlich',v:200,c:'var(--neutral)'},
+    {l:'2 × Premium, monatlich',v:250,c:'var(--neutral)'}
+  ],{fmt:usd,max:250,ticks:5,aria:'Monatliche Kosten verschiedener Platz-Kombinationen'});
+
+  hbar('chart-billing',[
+    {l:'Jährlich (12 × 40 $)',v:480,c:'var(--s1)'},
+    {l:'Monatlich, ganzjährig (12 × 50 $)',v:600,c:'var(--neutral)'},
+    {l:'Monatlich, nur April–Dez. (9 × 50 $)',v:450,c:'var(--s3)',t:'nur wenn Pausieren ohne Datenverlust möglich ist'}
+  ],{fmt:usd,max:600,ticks:3,labelW:270,aria:'Jahreskosten nach Abrechnungsart'});
+
+  hbar('chart-hours',[
+    {l:'Charter- und Gruppenanfragen',v:7.5},
+    {l:'Gäste-Mails',v:4},
+    {l:'Texte, Website, Social Media',v:3},
+    {l:'Belege für DATEV',v:2.5},
+    {l:'Dienstplan und Fristen',v:2},
+    {l:'Auswertungen (BWA)',v:1}
+  ],{fmt:hrs,max:8,ticks:4,aria:'Gesparte Bürostunden pro Saisonmonat'});
+
+  hbar('chart-roi',[
+    {l:'Kosten Claude Team (2 Plätze)',v:45,c:'var(--s2)',t:'40–50 $, grob umgerechnet'},
+    {l:'Wert der gesparten Bürozeit',v:500,c:'var(--s3)',t:'20 h × 25 €'}
+  ],{fmt:eur,max:500,ticks:5,labelW:250,aria:'Kosten und Nutzen im Saisonmonat'});
+
+  // Spannen-Diagramm Buchhaltung: Punkt (Mitte) + Whisker
+  (function(){
+    var d=[{l:'DATEV-Gebühren',lo:15,hi:35},{l:'Lohnabrechnung (6 Beschäftigte)',lo:120,hi:210},{l:'Laufende Buchhaltung Steuerbüro',lo:80,hi:400}];
+    var W=720,lw=250,rh=44,top=8,H=top+d.length*rh+28,pw=W-lw-40,max=400;
+    var svg=el('svg',{viewBox:'0 0 '+W+' '+H,role:'img','aria-label':'Monatliche Buchhaltungskosten als Spannen'});
+    for(var i=0;i<=4;i++){var gx=lw+pw*i/4;el('line',{x1:gx,x2:gx,y1:top,y2:H-24,stroke:'var(--grid)'},svg);txt(svg,gx,H-8,eur(max*i/4),'','middle');}
+    d.forEach(function(r,i){
+      var cy=top+i*rh+20,x1=lw+pw*r.lo/max,x2=lw+pw*r.hi/max,xm=(x1+x2)/2;
+      var g=el('g',{'class':'bar'},svg);
+      el('rect',{x:0,y:cy-20,width:W,height:rh,fill:'transparent'},g);
+      txt(g,lw-12,cy+5,r.l,'lbl','end');
+      el('line',{x1:x1,x2:x2,y1:cy,y2:cy,stroke:'var(--s1)','stroke-width':2},g);
+      el('line',{x1:x1,x2:x1,y1:cy-7,y2:cy+7,stroke:'var(--s1)','stroke-width':2},g);
+      el('line',{x1:x2,x2:x2,y1:cy-7,y2:cy+7,stroke:'var(--s1)','stroke-width':2},g);
+      el('circle',{cx:xm,cy:cy,r:6,fill:'var(--s1)',stroke:'var(--surface)','stroke-width':2},g);
+      txt(g,Math.min(x2+8,W-80),cy-10,r.lo+'–'+r.hi+' €','val');
+      bindTip(g,r.l+': '+r.lo+'–'+r.hi+' € pro Monat');
+    });
+    document.getElementById('chart-accounting').appendChild(svg);
+  })();
+
+  // Belegfluss-Diagramm
+  (function(){
+    var W=720,H=300,svg=el('svg',{viewBox:'0 0 '+W+' '+H,role:'img','aria-label':'Belegfluss vom Betrieb über DATEV zum Steuerbüro'});
+    var defs=el('defs',{},svg),m=el('marker',{id:'ar',viewBox:'0 0 10 10',refX:9,refY:5,markerWidth:7,markerHeight:7,orient:'auto'},defs);
+    el('path',{d:'M0,0L10,5L0,10z',fill:'var(--muted)'},m);
+    function box(x,y,w,h,label,sub,claude){
+      el('rect',{x:x,y:y,width:w,height:h,rx:10,fill:'var(--surface)',stroke:claude?'var(--s1)':'var(--neutral)','stroke-width':claude?2.5:1.5},svg);
+      txt(svg,x+w/2,y+(sub?h/2-3:h/2+5),label,'lbl','middle');
+      if(sub)txt(svg,x+w/2,y+h/2+15,sub,'','middle');
+    }
+    function arrow(x1,y1,x2,y2){el('path',{d:'M'+x1+','+y1+' C'+(x1+40)+','+y1+' '+(x2-40)+','+y2+' '+x2+','+y2,fill:'none',stroke:'var(--muted)','stroke-width':1.5,'marker-end':'url(#ar)'},svg);}
+    var rows=[['Rechnungen per Mail',30,true],['Papierbelege',95,false],['Kontoumsätze',160,false],['Bordkasse (TSE)',225,false]];
+    rows.forEach(function(r){box(10,r[1],170,46,r[0],null,r[2]);});
+    box(220,30,150,46,'Claude prüft','sortiert, leitet weiter',true);
+    box(220,95,150,46,'Upload mobil','Handy-App',false);
+    box(220,160,150,46,'Bank online','',false);
+    box(220,225,150,46,'Kassenarchiv','online',false);
+    box(410,100,140,100,'DATEV','Unternehmen online',false);
+    box(590,120,120,60,'Steuerbüro','bucht',false);
+    arrow(180,53,220,53);arrow(180,118,220,118);arrow(180,183,220,183);arrow(180,248,220,248);
+    arrow(370,53,410,125);arrow(370,118,410,140);arrow(370,183,410,160);arrow(370,248,410,180);
+    arrow(550,150,590,150);
+    document.getElementById('chart-flow').appendChild(svg);
+  })();
+
+  // Einführungs-Zeitplan
+  (function(){
+    var tasks=[['Plan buchen, Apps, Konnektoren',0,1],['Projektwissen sammeln',0,2],['Hausregeln, Datenschutz',1,2],['DATEV Upload Mail mit Steuerbüro',1,3],['Pilot im Alltag',2,4],['Auswertung',3.6,4]];
+    var W=720,lw=250,rh=34,top=26,H=top+tasks.length*rh+10,pw=W-lw-20;
+    var svg=el('svg',{viewBox:'0 0 '+W+' '+H,role:'img','aria-label':'Zeitplan der Einführung über vier Wochen'});
+    for(var w=0;w<=4;w++){var gx=lw+pw*w/4;el('line',{x1:gx,x2:gx,y1:top-6,y2:H-6,stroke:'var(--grid)'},svg);if(w<4)txt(svg,gx+pw/8,16,'Woche '+(w+1),'','middle');}
+    tasks.forEach(function(t,i){
+      var y=top+i*rh+4,x=lw+pw*t[1]/4,wd=pw*(t[2]-t[1])/4;
+      var g=el('g',{'class':'bar'},svg);
+      txt(g,lw-12,y+17,t[0],'lbl','end');
+      el('rect',{x:x+1,y:y,width:wd-2,height:24,rx:4,fill:i===4?'var(--s3)':'var(--s1)','class':'m'},g);
+      bindTip(g,t[0]+': Woche '+(Math.floor(t[1])+1)+(Math.ceil(t[2])>Math.floor(t[1])+1?'–'+Math.ceil(t[2]):''));
+    });
+    document.getElementById('chart-timeline').appendChild(svg);
+  })();
+})();
+</script>
+</body>
+</html>
