@@ -2,3 +2,9 @@
 # damit keine Credits fuer Deploys verbraucht werden.
 [build]
   ignore = "exit 0"
+
+# Sperrvermerk fuer Suchmaschinen (falls doch ueber Netlify ausgeliefert)
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Robots-Tag = "noindex, nofollow"
